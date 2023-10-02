@@ -1,0 +1,63 @@
+﻿@page "/users"
+
+<MudContainer>
+    <h3>Benutzerverwaltung</h3>
+
+    <!-- Benutzer erstellen -->
+    <h4>Benutzer erstellen</h4>
+    <MudPaper>
+        <MudTextField @bind-Value="newUser.Username" Label="Benutzername" />
+        <MudTextField @bind-Value="customPassword" Label="Passwort" Type="Password" />
+        <MudSelect @bind-Value="newUser.Rights" Label="Rechte">
+            <MudSelectItem Value="1">Owner</MudSelectItem>
+            <MudSelectItem Value="2">Admin</MudSelectItem>
+            <MudSelectItem Value="3">User</MudSelectItem>
+        </MudSelect>
+        <MudTextField @bind-Value="newUser.LastLoginIp" Label="Letzte Login-IP" />
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="CreateUser">Benutzer erstellen</MudButton>
+    </MudPaper>
+
+    <!-- Benutzer aktualisieren -->
+    <h4>Benutzer aktualisieren</h4>
+    <MudPaper>
+        <MudSelect @bind-Value="selectedUser" Label="Benutzer auswählen">
+            @foreach (var user in userList)
+            {
+                <MudSelectItem Value="@user.Id">@user.Username</MudSelectItem>
+            }
+        </MudSelect>
+        <MudTextField @bind-Value="selectedUser.Username" Label="Benutzername" />
+        <MudTextField @bind-Value="newPassword" Label="Neues Passwort" Type="Password" />
+        <MudSelect @bind-Value="newRights" Label="Neue Rechte">
+            <MudSelectItem Value="1">Owner</MudSelectItem>
+            <MudSelectItem Value="2">Admin</MudSelectItem>
+            <MudSelectItem Value="3">User</MudSelectItem>
+        </MudSelect>
+        <MudTextField @bind-Value="newLastLoginIp" Label="Neue Letzte Login-IP" />
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="UpdateUser">Benutzer aktualisieren</MudButton>
+    </MudPaper>
+
+    <!-- Benutzer löschen -->
+    <h4>Benutzer löschen</h4>
+    <MudPaper>
+        <MudTextField @bind-Value="deleteUsername" Label="Benutzername" />
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="DeleteUser">Benutzer löschen</MudButton>
+    </MudPaper>
+
+    <!-- Anzeige der Benutzerliste -->
+    <h4>Benutzerliste</h4>
+    <MudTable Items="userList" Class="mt-3">
+        <HeaderContent>
+            <MudTh>ID</MudTh>
+            <MudTh>Benutzername</MudTh>
+            <MudTh>Rights</MudTh>
+            <MudTh>Letzte Login-IP</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.Id</MudTd>
+            <MudTd>@context.Username</MudTd>
+            <MudTd>@context.Rights</MudTd>
+            <MudTd>@context.LastLoginIp</MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudContainer>

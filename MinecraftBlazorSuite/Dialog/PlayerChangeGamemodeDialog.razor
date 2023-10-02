@@ -1,0 +1,24 @@
+﻿<MudDialog>
+    <DialogContent>
+        <MudSelect @bind-Value="SelectedGamemode" T="MinecraftGamemodes">
+            <MudSelectItem Value="MinecraftGamemodes.Survival">Survival</MudSelectItem>
+            <MudSelectItem Value="MinecraftGamemodes.Adventure">Adventure</MudSelectItem>
+            <MudSelectItem Value="MinecraftGamemodes.Creative">Creative</MudSelectItem>
+            <MudSelectItem Value="MinecraftGamemodes.Spectator">Spectator</MudSelectItem>
+        </MudSelect>
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Send</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    public MinecraftGamemodes SelectedGamemode { get; set; }
+
+    void Submit() => MudDialog.Close(DialogResult.Ok(SelectedGamemode));
+    void Cancel() => MudDialog.Cancel();
+}

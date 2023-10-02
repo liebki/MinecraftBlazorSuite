@@ -1,0 +1,8 @@
+{
+    "DatabaseHashSalt": "The1Salt",
+    "MaxConsoleMessages": 60,
+    "ServerJarPath": "Path:\\To\\ServerJarFile\\spigot-1.17.X.jar",
+    "JavaArguments": "-Xms2G -Xmx2G -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions",
+    "MinecraftServerType": "Spigot",
+    "MinecraftServerVersion": "X"
+}
