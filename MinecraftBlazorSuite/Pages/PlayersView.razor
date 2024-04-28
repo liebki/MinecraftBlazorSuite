@@ -11,35 +11,37 @@
                 <MudExpansionPanel Style="background-color: #3498DB;">
                     <TitleContent>
                         <div style="display: flex; align-items: center;">
-                            <img src=@Tools.GetUserSkin(spline.UUID, SkinSelectionType.Avatar, 30) style="margin-right: 10px;" />
+                            <img src=@Tools.GetUserSkin(spline.UUID, SkinSelectionType.Avatar, 30) style="margin-right: 10px;"/>
                             <MudText Style="color: #ECF0F1;" Typo="Typo.h6">@spline.PlayerName</MudText>
                         </div>
                     </TitleContent>
 
                     <ChildContent>
 
-                    <div>
-                        <MudText Style="color: #ECF0F1;" Typo="Typo.subtitle1"><b>Player informations</b></MudText>
-                        <MudText Style="color: #ECF0F1;" Class="mt-2" Typo="Typo.body2">@($"UUID: {spline.UUID}")</MudText>
-                        <MudText Style="color: #ECF0F1;" Typo="Typo.body2">@($"Address: {spline.IPAddress}")</MudText>
-                        <MudText Style="color: #ECF0F1;" Typo="Typo.body2">@($"Time on join: {spline.Time}")</MudText>
-                    </div>
+                        <div>
+                            <MudText Style="color: #ECF0F1;" Typo="Typo.subtitle1">
+                                <b>Player informations</b>
+                            </MudText>
+                            <MudText Style="color: #ECF0F1;" Class="mt-2" Typo="Typo.body2">@($"UUID: {spline.UUID}")</MudText>
+                            <MudText Style="color: #ECF0F1;" Typo="Typo.body2">@($"Address: {spline.IPAddress}")</MudText>
+                            <MudText Style="color: #ECF0F1;" Typo="Typo.body2">@($"Time on join: {spline.Time}")</MudText>
+                        </div>
 
-                    <MudButtonGroup Class="mt-3" OverrideStyles="false">
-                        <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(() => SendMessage(spline.PlayerName))">Message</MudButton>
-                                <MudButton Style="color: #ECF0F1;" Variant="Variant.Filled" Color="Color.Dark" OnClick="@(() => ChangeGamemode(spline.PlayerName))">Gamemode</MudButton>
-                    </MudButtonGroup>
+                        <MudButtonGroup Class="mt-3" OverrideStyles="false">
+                            <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(() => SendMessage(spline.PlayerName))">Message</MudButton>
+                            <MudButton Style="color: #ECF0F1;" Variant="Variant.Filled" Color="Color.Dark" OnClick="@(() => ChangeGamemode(spline.PlayerName))">Gamemode</MudButton>
+                        </MudButtonGroup>
 
-                    <MudButtonGroup Class="mt-3" OverrideStyles="false">
-                        <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Error" OnClick="@(() => KillPlayer(spline.PlayerName))">Kill</MudButton>
-                        <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Warning" OnClick="@(() => KickWithMessage(spline.PlayerName))">Kick</MudButton>
-                        <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Error" OnClick="@(() => BanWithMessage(spline.PlayerName))">Ban</MudButton>
-                    </MudButtonGroup>
+                        <MudButtonGroup Class="mt-3" OverrideStyles="false">
+                            <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Error" OnClick="@(() => KillPlayer(spline.PlayerName))">Kill</MudButton>
+                            <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Warning" OnClick="@(() => KickWithMessage(spline.PlayerName))">Kick</MudButton>
+                            <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Error" OnClick="@(() => BanWithMessage(spline.PlayerName))">Ban</MudButton>
+                        </MudButtonGroup>
 
-                    <MudButtonGroup OverrideStyles="false">
-                        <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Warning" OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, true))">Give OP</MudButton>
-                        <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Success" OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, false))">Remove OP</MudButton>
-                    </MudButtonGroup>
+                        <MudButtonGroup OverrideStyles="false">
+                            <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Warning" OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, true))">Give OP</MudButton>
+                            <MudButton Style="color: #212121;" Variant="Variant.Filled" Color="Color.Success" OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, false))">Remove OP</MudButton>
+                        </MudButtonGroup>
 
                     </ChildContent>
                 </MudExpansionPanel>

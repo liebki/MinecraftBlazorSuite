@@ -1,11 +1,9 @@
-﻿
-namespace MinecraftBlazorSuite.Models.Enums
+﻿namespace MinecraftBlazorSuite.Models.Enums;
+
+public enum SkinSelectionType
 {
-    public enum SkinSelectionType
-    {
-        Head,
-        Avatar,
-        Skin,
-        Combo
-    }
+    Head,
+    Avatar,
+    Skin,
+    Combo
 }

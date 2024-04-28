@@ -1,4 +1,4 @@
-/* 
+/*
     <MinecraftBlazorSuite - Minecraft Server Wrapper>
     Copyright (C) <2023>  <liebki>
 
@@ -16,52 +16,50 @@
     along with this program (License.txt).  If not, see <https://www.gnu.org/licenses/>.
  */
 
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using MinecraftBlazorSuite.Manager;
 using MinecraftBlazorSuite.Services;
 using MudBlazor.Services;
 
-namespace MinecraftBlazorSuite
+namespace MinecraftBlazorSuite;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        Console.WriteLine(
+            "This software is licensed under the 'GNU AFFERO GENERAL PUBLIC LICENSE' V3.0 all details can be found under License.txt found in the same directory.");
+        Tools.GetSettings();
+
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddRazorPages();
+
+        builder.Services.AddServerSideBlazor();
+        builder.Services.AddScoped<AddressContext>();
+
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddSingleton<ServerManagementService>();
+
+        builder.Services.AddSingleton<SqliteManager>(sp =>
         {
-            Console.WriteLine("This software is licensed under the 'GNU AFFERO GENERAL PUBLIC LICENSE' V3.0 all details can be found under License.txt found in the same directory.");
-            Tools.GetSettings();
+            return new SqliteManager(Tools.Settings.DatabaseHashSalt);
+        });
 
-            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddRazorPages();
+        builder.Services.AddMudServices();
+        WebApplication app = builder.Build();
 
-            builder.Services.AddServerSideBlazor();
-            builder.Services.AddScoped<AddressContext>();
-
-            builder.Services.AddHttpContextAccessor();
-            builder.Services.AddSingleton<ServerManagementService>();
-
-            builder.Services.AddSingleton<SqliteManager>(sp =>
-            {
-                return new SqliteManager(Tools.Settings.DatabaseHashSalt);
-            });
-
-            builder.Services.AddMudServices();
-            WebApplication app = builder.Build();
-
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-            app.MapBlazorHub();
-
-            app.MapFallbackToPage("/_Host");
-            app.Run();
-
+        if (!app.Environment.IsDevelopment())
+        {
+            app.UseExceptionHandler("/Error");
+            app.UseHsts();
         }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+
+        app.UseRouting();
+        app.MapBlazorHub();
+
+        app.MapFallbackToPage("/_Host");
+        app.Run();
     }
 }

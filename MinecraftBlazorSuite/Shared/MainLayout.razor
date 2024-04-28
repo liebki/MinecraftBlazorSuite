@@ -1,8 +1,8 @@
 ﻿@inherits LayoutComponentBase
 
-<MudDialogProvider />
-<MudSnackbarProvider />
-<MudThemeProvider Theme="@theme" />
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+<MudThemeProvider Theme="@theme"/>
 
 <MudLayout>
     <MudDrawer PreserveOpenState="true" Open="true">
@@ -11,7 +11,7 @@
                 <MudLink Style="color: #000 !important;" Underline="Underline.None" Target="_blank" Typo="Typo.h6" Href="https://github.com/liebki/BlazorServerWrapper">MinecraftBlazorSuite</MudLink>
             </div>
 
-            <MudDivider Class="my-2" />
+            <MudDivider Class="my-2"/>
 
             <MudNavLink Icon="@Icons.Material.Filled.Window" Href="/" Match="NavLinkMatch.All" Class="menu-link">Console</MudNavLink>
             <MudNavLink Icon="@Icons.Material.Filled.PersonSearch" Href="/players" Match="NavLinkMatch.Prefix" Class="menu-link">Players</MudNavLink>
@@ -26,17 +26,19 @@
 </MudLayout>
 
 @code {
-    private MudTheme theme = new MudTheme()
+
+    private readonly MudTheme theme = new()
+    {
+        Palette = new PaletteLight
         {
-            Palette = new PaletteLight()
-            {
-                PrimaryContrastText = "#000",
-                AppbarText = "#000",
-                DrawerText = "#000",
-                TextPrimary = "#000",
-                Background = "#fff",
-                BackgroundGrey = "#ECF0F1",
-                DrawerBackground = "#ECF0F1"
-            },
-        };
+            PrimaryContrastText = "#000",
+            AppbarText = "#000",
+            DrawerText = "#000",
+            TextPrimary = "#000",
+            Background = "#fff",
+            BackgroundGrey = "#ECF0F1",
+            DrawerBackground = "#ECF0F1"
+        }
+    };
+
 }

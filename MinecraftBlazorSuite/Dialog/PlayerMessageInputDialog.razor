@@ -1,6 +1,6 @@
 ﻿<MudDialog>
     <DialogContent>
-        <MudTextField @bind-Value=MessageContent HelperText="Write something you want to say.." />
+        <MudTextField @bind-Value="MessageContent" HelperText="Write something you want to say.."/>
     </DialogContent>
 
     <DialogActions>
@@ -14,6 +14,14 @@
 
     public string MessageContent = string.Empty;
 
-    void Submit() => MudDialog.Close(DialogResult.Ok(MessageContent));
-    void Cancel() => MudDialog.Cancel();
+    void Submit()
+    {
+        MudDialog.Close(DialogResult.Ok(MessageContent));
+    }
+
+    void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
 }

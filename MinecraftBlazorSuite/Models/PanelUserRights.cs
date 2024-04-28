@@ -1,11 +1,8 @@
-﻿using System;
+﻿namespace MinecraftBlazorSuite.Models;
 
-namespace MinecraftBlazorSuite.Models
+public enum PanelUserRights
 {
-    public enum PanelUserRights
-    {
-        Owner = 1,
-        Admin = 2,
-        User = 3
-    }
+    Owner = 1,
+    Admin = 2,
+    User = 3
 }

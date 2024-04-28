@@ -1,9 +1,7 @@
-﻿
-namespace MinecraftBlazorSuite.Models.LogEntries
+﻿namespace MinecraftBlazorSuite.Models.LogEntries;
+
+public class PlayerLeftLogEntry
 {
-    public class PlayerLeftLogEntry
-    {
-        public string Time { get; set; }
-        public string PlayerName { get; set; }
-    }
+    public string Time { get; set; }
+    public string PlayerName { get; set; }
 }

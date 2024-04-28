@@ -5,19 +5,19 @@
 <div class="console mt-5">
     <div>
         <MudList Dense Clickable="true">
-             @foreach ((string consoleLineContent, LogEntryType lineType) in consoleContent)
+            @foreach ((string consoleLineContent, LogEntryType lineType) in consoleContent)
             {
                 @if (lineType == LogEntryType.JoinUUID)
                 {
-                    <MudListItem Icon="@Icons.Material.Filled.PlusOne" IconColor="Color.Success" Text="@consoleLineContent" />
+                    <MudListItem Icon="@Icons.Material.Filled.PlusOne" IconColor="Color.Success" Text="@consoleLineContent"/>
                 }
                 else if (lineType == LogEntryType.ConnectionLost)
                 {
-                    <MudListItem Icon="@Icons.Material.Filled.Backspace" IconColor="Color.Error" Text="@consoleLineContent" />
+                    <MudListItem Icon="@Icons.Material.Filled.Backspace" IconColor="Color.Error" Text="@consoleLineContent"/>
                 }
                 else if (lineType == LogEntryType.Chat)
                 {
-                    <MudListItem Icon="@Icons.Material.Filled.ChatBubble" IconColor="Color.Info" Text="@consoleLineContent" />
+                    <MudListItem Icon="@Icons.Material.Filled.ChatBubble" IconColor="Color.Info" Text="@consoleLineContent"/>
                 }
                 else
                 {
@@ -31,10 +31,10 @@
 </div>
 
 <div class="mt-3">
-    <MudTextField Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Computer" @bind-Value="commandInput" />
+    <MudTextField Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Computer" @bind-Value="commandInput"/>
 
-    <MudButtonGroup Class="mt-5" OverrideStyles=false>
-        <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="(() => SendCommand())">Execute</MudButton>
+    <MudButtonGroup Class="mt-5" OverrideStyles="false">
+        <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="() => SendCommand()">Execute</MudButton>
         <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick=@(() => SendCommand("stop"))>Stop</MudButton>
         <MudButton Color="Color.Info" Variant="Variant.Filled" OnClick=@(() => SendCommand("reload"))>Reload</MudButton>
 

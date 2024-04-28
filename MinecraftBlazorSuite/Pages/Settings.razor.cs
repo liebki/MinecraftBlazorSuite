@@ -1,23 +1,19 @@
-﻿
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MinecraftBlazorSuite.Services;
 
-namespace MinecraftBlazorSuite.Pages
+namespace MinecraftBlazorSuite.Pages;
+
+partial class Settings
 {
-    partial class Settings
+    [Inject] private ServerManagementService minecraftServerService { get; set; }
+
+    private void ForcePlayerlistReset()
     {
-        [Inject]
-        private ServerManagementService minecraftServerService { get; set; }
+        minecraftServerService.Spielerliste.Clear();
+    }
 
-        private void ForcePlayerlistReset()
-        {
-            minecraftServerService.Spielerliste.Clear();
-        }
-
-        private void ForcePlayerlistRecrawl()
-        {
-            //TODO: Recrawl using /list and parsing content
-        }
-
+    private void ForcePlayerlistRecrawl()
+    {
+        //TODO: Recrawl using /list and parsing content
     }
 }
