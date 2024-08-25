@@ -4,7 +4,7 @@
 
 <div class="console mt-5">
     <div>
-        <MudList Dense Clickable="true">
+        <MudList T="MudListItem<string>" Dense>
             @foreach ((string consoleLineContent, LogEntryType lineType) in consoleContent)
             {
                 @if (lineType == LogEntryType.JoinUUID)
@@ -31,18 +31,27 @@
 </div>
 
 <div class="mt-3">
-    <MudTextField Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Computer" @bind-Value="commandInput"/>
+    <MudTextField Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Code" HelperText="Type in any command you want, then press 'EXECUTE' below" @bind-Value="commandInput"/>
 
     <MudButtonGroup Class="mt-5" OverrideStyles="false">
-        <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="() => SendCommand()">Execute</MudButton>
-        <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick=@(() => SendCommand("stop"))>Stop</MudButton>
-        <MudButton Color="Color.Info" Variant="Variant.Filled" OnClick=@(() => SendCommand("reload"))>Reload</MudButton>
+        <MudButton Color="Color.Success" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Code" OnClick="() => SendCommand()">Execute</MudButton>
+        <MudButton Color="Color.Error" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Stop" OnClick=@(() => SendCommand("stop"))>Stop</MudButton>
+        <MudButton Color="Color.Warning" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.RestartAlt" OnClick=@(() => SendCommand("reload"))>Reload</MudButton>
+    </MudButtonGroup>
 
-        <MudMenu AnchorOrigin="Origin.TopCenter" Color="Color.Warning" Variant="Variant.Filled" Label="Change daytime">
-            <MudMenuItem IconColor="Color.Warning" Icon="@Icons.Material.Filled.WbSunny" OnClick=@(() => SendCommand("time set day"))>Day</MudMenuItem>
-            <MudMenuItem IconColor="Color.Info" Icon="@Icons.Material.Filled.ViewDay" OnClick=@(() => SendCommand("time set noon"))>Noon</MudMenuItem>
-            <MudMenuItem IconColor="Color.Primary" Icon="@Icons.Material.Filled.ModeNight" OnClick=@(() => SendCommand("time set night"))>Night</MudMenuItem>
+
+    <MudButtonGroup Class="mt-5" OverrideStyles="false">
+        <MudMenu AnchorOrigin="Origin.TopCenter" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Timer" Variant="Variant.Filled" Label="Change daytime">
+            <MudMenuItem IconColor="Color.Warning" Icon="@Icons.Material.Filled.Lightbulb" OnClick=@(() => SendCommand("time set day"))>Day</MudMenuItem>
+            <MudMenuItem IconColor="Color.Info" Icon="@Icons.Material.Filled.Light" OnClick=@(() => SendCommand("time set noon"))>Noon</MudMenuItem>
+            <MudMenuItem IconColor="Color.Primary" Icon="@Icons.Material.Filled.Nightlight" OnClick=@(() => SendCommand("time set night"))>Night</MudMenuItem>
             <MudMenuItem IconColor="Color.Dark" Icon="@Icons.Material.Filled.Bed" OnClick=@(() => SendCommand("time set midnight"))>Midnight</MudMenuItem>
+        </MudMenu>
+
+        <MudMenu AnchorOrigin="Origin.TopCenter" Color="Color.Info" StartIcon="@Icons.Material.Filled.Article" Variant="Variant.Filled" Label="Change weather">
+            <MudMenuItem IconColor="Color.Warning" Icon="@Icons.Material.Filled.WbSunny" OnClick=@(() => SendCommand("weather clear"))>Clear</MudMenuItem>
+            <MudMenuItem IconColor="Color.Info" Icon="@Icons.Material.Filled.WaterDrop" OnClick=@(() => SendCommand("weather rain"))>Rain</MudMenuItem>
+            <MudMenuItem IconColor="Color.Primary" Icon="@Icons.Material.Filled.Thunderstorm" OnClick=@(() => SendCommand("weather thunder"))>Thunder</MudMenuItem>
         </MudMenu>
     </MudButtonGroup>
 </div>

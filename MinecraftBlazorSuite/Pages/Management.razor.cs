@@ -3,7 +3,7 @@ using MinecraftBlazorSuite.Services;
 
 namespace MinecraftBlazorSuite.Pages;
 
-partial class Settings
+partial class Management
 {
     [Inject] private ServerManagementService minecraftServerService { get; set; }
 

@@ -39,10 +39,7 @@ public class Program
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddSingleton<ServerManagementService>();
 
-        builder.Services.AddSingleton<SqliteManager>(sp =>
-        {
-            return new SqliteManager(Tools.Settings.DatabaseHashSalt);
-        });
+        builder.Services.AddSingleton<SqliteManager>(sp => new SqliteManager(Tools.Settings.DatabaseHashSalt));
 
         builder.Services.AddMudServices();
         WebApplication app = builder.Build();

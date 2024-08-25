@@ -1,0 +1,13 @@
+﻿@page "/management"
+
+<MudText Typo="Typo.h5">Management</MudText>
+
+<div class="mt-3">
+    <MudText Typo="Typo.h6" Class="mt-3">Available actions for <MudLink Typo="Typo.h6" Href="/players">/Players</MudLink> (use only when there is something wrong).</MudText>
+
+    <MudText Typo="Typo.body1" Class="mt-3">To reset all players for the view:</MudText>
+    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AssignmentReturn" Color="Color.Error" OnClick="ForcePlayerlistReset">Reset players</MudButton>
+
+    <MudText Typo="Typo.body1" Class="mt-3">To recrawl all online players for the view:</MudText>
+    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CollectionsBookmark" Color="Color.Warning" OnClick="ForcePlayerlistRecrawl">Recrawl players</MudButton>
+</div>

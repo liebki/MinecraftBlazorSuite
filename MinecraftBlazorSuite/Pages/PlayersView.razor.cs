@@ -57,6 +57,12 @@ partial class PlayersView
         if (!result.Canceled) SendCommand(string.Format(MinecraftCommands.MsgCommand, playername, result.Data));
     }
 
+    private async Task HealPlayer(string playername)
+    {
+        SendCommand(string.Format(MinecraftCommands.HealCommand, playername));
+    }
+
+
     private async Task ChangeGamemode(string playername)
     {
         IDialogReference dialog =

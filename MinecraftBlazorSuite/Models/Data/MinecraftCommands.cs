@@ -9,4 +9,5 @@ public static class MinecraftCommands
     public const string BanCommand = "ban {0} {1}";
     public const string MsgCommand = "msg {0} {1}";
     public const string GamemodeCommand = "gamemode {0} {1}";
+    public const string HealCommand = "effect give {0} minecraft:instant_health 1 99";
 }

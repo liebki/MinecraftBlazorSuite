@@ -3,6 +3,7 @@
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 <MudThemeProvider Theme="@theme"/>
+<MudPopoverProvider />
 
 <MudLayout>
     <MudDrawer PreserveOpenState="true" Open="true">
@@ -15,8 +16,8 @@
 
             <MudNavLink Icon="@Icons.Material.Filled.Window" Href="/" Match="NavLinkMatch.All" Class="menu-link">Console</MudNavLink>
             <MudNavLink Icon="@Icons.Material.Filled.PersonSearch" Href="/players" Match="NavLinkMatch.Prefix" Class="menu-link">Players</MudNavLink>
-            <MudNavLink Icon="@Icons.Material.Filled.Settings" Href="/settings" Match="NavLinkMatch.Prefix" Class="menu-link">Settings</MudNavLink>
-            <MudNavLink Icon="@Icons.Material.Filled.Checklist" Href="/about" Match="NavLinkMatch.Prefix" Class="menu-link">About</MudNavLink>
+            <MudNavLink Icon="@Icons.Material.Filled.Settings" Href="/management" Match="NavLinkMatch.Prefix" Class="menu-link">Management</MudNavLink>
+            <MudNavLink Icon="@Icons.Material.Filled.Checklist" Href="/help" Match="NavLinkMatch.Prefix" Class="menu-link">Help</MudNavLink>
         </MudNavMenu>
     </MudDrawer>
 
@@ -29,14 +30,14 @@
 
     private readonly MudTheme theme = new()
     {
-        Palette = new PaletteLight
+        PaletteLight = new PaletteLight
         {
             PrimaryContrastText = "#000",
             AppbarText = "#000",
             DrawerText = "#000",
             TextPrimary = "#000",
             Background = "#fff",
-            BackgroundGrey = "#ECF0F1",
+            BackgroundGray = "#ECF0F1",
             DrawerBackground = "#ECF0F1"
         }
     };
