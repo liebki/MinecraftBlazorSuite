@@ -96,26 +96,41 @@ Please be aware that this is work in progress, and there are some issues:
 
 ### Troubleshooting
 
-If you encounter any issues during installation or usage, refer to the following troubleshooting tips:
+If you encounter any issues during installation or usage, refer to the following troubleshooting tips [or create an issue](https://github.com/liebki/MinecraftBlazorSuite/issues):
 
 - **Q: The MinecraftBlazorSuite console says something like "Error: Unable to access jarfile x.... .jar"**
-
   - A: Make sure the path in the settings file is correct, it sounds like it is not!
 
-- **Q: The MinecraftBlazorSuite console says something like "File/Process is locked x...."**
+- **Q: How do I start the server after I started the interface?**
+  - A: Simply login and visit the console page under /console and the server should start after a few seconds, if not verify that the location of the server-jar is correct etc.
 
+- **Q: The MinecraftBlazorSuite console says something like "File/Process is locked x...."**
   - A: This sounds like another server is already running, try closing all servers or better just restart the whole system to solve this faster.
+
+- **Q: How to log in the panel?**
+  - A: The password to login is '12345678', please change it after logging in!
+  - Also a "Session" is only valid for about three hours, so entering the page after the initial login three hours ago, you have to login again.
+  - Multiple people *could* be online in the interface but there aren't any checks.
+
+- **Q: After login I can't open the /console page, I get a red bar at the bottom which says "an error occured"..**
+  - A: This propably comes up because the server jar file is not set or the file is not a server or another problem relating to it, please be sure that is correct before reporting a problem.
 
 ## Screenshots / Videos
 
 Here is a GIF, that shows how the server is booting up in the interface, not much but honest work.
 
 ![IMAGE](https://github.com/liebki/MinecraftBlazorSuite/blob/master/MinecraftBlazorSuite/img/console-view.png)
-![GIF](https://github.com/liebki/MinecraftBlazorSuite/blob/master/MinecraftBlazorSuite/img/players-view.gif)
+![GIF](https://github.com/liebki/MinecraftBlazorSuite/blob/master/MinecraftBlazorSuite/img/application.gif)
 
 ## Contributing
 
 If you'd like to contribute, please do so contributions are welcome, especially if you want new features or support for more versions.
+
+### TODO:
+- Auto-Commands
+- Optional Command-History
+- Auto-Restart
+- More advanced player informations
 
 ## License
 

@@ -1,6 +1,6 @@
 ﻿<MudDialog>
     <DialogContent>
-        <MudTextField @bind-Value="MessageContent" HelperText="Write something you want to say.."/>
+        <MudTextField @bind-Value="MessageContent" HelperText="Write something you want to say to the player.."/>
     </DialogContent>
 
     <DialogActions>
@@ -8,20 +8,3 @@
         <MudButton Color="Color.Primary" OnClick="Submit">Send</MudButton>
     </DialogActions>
 </MudDialog>
-
-@code {
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-
-    public string MessageContent = string.Empty;
-
-    void Submit()
-    {
-        MudDialog.Close(DialogResult.Ok(MessageContent));
-    }
-
-    void Cancel()
-    {
-        MudDialog.Cancel();
-    }
-
-}

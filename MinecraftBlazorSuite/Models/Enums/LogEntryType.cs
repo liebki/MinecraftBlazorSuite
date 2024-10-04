@@ -2,11 +2,18 @@
 
 public enum LogEntryType
 {
-    JoinUUID,
+    JoinUuid,
     Login,
     Chat,
     Command,
     ConnectionLost,
     PlayerLeft,
+    PlayerJoined,
+    ServerVersion,
+    ServerStartupDone,
+    ServerReloadDone,
+    ServerTypeSponge,
+    ServerTypeCraftbukkit,
+    PlayerListParsing,
     None
 }

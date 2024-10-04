@@ -2,12 +2,54 @@
 
 <MudText Typo="Typo.h5">Management</MudText>
 
-<div class="mt-3">
-    <MudText Typo="Typo.h6" Class="mt-3">Available actions for <MudLink Typo="Typo.h6" Href="/players">/Players</MudLink> (use only when there is something wrong).</MudText>
+<MudDivider Class="mt-2" />
 
-    <MudText Typo="Typo.body1" Class="mt-3">To reset all players for the view:</MudText>
-    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AssignmentReturn" Color="Color.Error" OnClick="ForcePlayerlistReset">Reset players</MudButton>
+<div class="mt-2">
+    <MudText Typo="Typo.body1">Please keep in mind, the statistics on this page are estimates.</MudText>
+    <MudText Typo="Typo.body2">Process ID of the server: @MinecraftServerService.getServerProcPid()</MudText>
+</div>
 
-    <MudText Typo="Typo.body1" Class="mt-3">To recrawl all online players for the view:</MudText>
-    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CollectionsBookmark" Color="Color.Warning" OnClick="ForcePlayerlistRecrawl">Recrawl players</MudButton>
+<MudDivider Class="mt-2" />
+
+<div class="mt-2">
+    <div>
+        <MudText Typo="Typo.body1" Class="mt-3">Approximated memory usage over time (last value in MB): @LastMemoryValueAvailable MB</MudText>
+        <MudChart ChartType="ChartType.Line" ChartSeries="@SeriesMemory" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="500px" ChartOptions="@Options"/>
+    </div>
+
+    <MudDivider Class="mt-5" />
+
+    <div class="mt-2">
+        <MudText Typo="Typo.body1" Class="mt-3">Approximated process usage over time (last value in %): @LastCpuValueAvailable %</MudText> <span>Value in graph is a higher scale than the percentage shown</span>
+        <MudChart ChartType="ChartType.Line" ChartSeries="@SeriesCpu" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="500px" ChartOptions="@Options2"/>
+    </div>
+</div>
+
+<MudDivider Class="mt-5" />
+
+<div class="mt-2">
+    @* Phone *@
+    <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
+        <MudContainer>
+            <MudText Typo="Typo.body1" Class="mt-3">Actions to use, to solve problems with the player list:</MudText>
+
+            <MudText Typo="Typo.body1" Class="mt-3">To reset all players for the view:</MudText>
+            <MudButton Size="Size.Small" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AssignmentReturn" Color="Color.Error" OnClick="ForcePlayerlistReset">Reset players</MudButton>
+
+            <MudText Typo="Typo.body1" Class="mt-3">To recrawl all online players for the view:</MudText>
+            <MudButton Size="Size.Small" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CollectionsBookmark" Color="Color.Warning" OnClick="ForcePlayerlistRecrawl">Recrawl players</MudButton>
+        </MudContainer>
+    </MudHidden>
+
+    @* Notebook *@
+    <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="false">
+        <MudText Typo="Typo.body1" Class="mt-3">Actions to use, to solve problems with the player list:</MudText>
+
+        <MudText Typo="Typo.body2" Class="mt-3">To reset all players for the view:</MudText>
+        <MudButton Size="Size.Small" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AssignmentReturn" Color="Color.Error" OnClick="ForcePlayerlistReset">Reset players</MudButton>
+
+        <MudText Typo="Typo.body2" Class="mt-3">To recrawl all online players for the view:</MudText>
+        <MudButton Size="Size.Small" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CollectionsBookmark" Color="Color.Warning" OnClick="ForcePlayerlistRecrawl">Recrawl players</MudButton>
+    </MudHidden>
+   
 </div>

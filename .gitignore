@@ -743,3 +743,6 @@ FodyWeavers.xsd
 .history/
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Java,macOS,Windows,ASPNETCore,VisualStudio,VisualStudioCode
+*.db
+*.sqlite
+*.sqlite3

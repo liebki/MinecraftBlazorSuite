@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using MinecraftBlazorSuite.Models.Data;
 using MinecraftBlazorSuite.Models.Enums;
 using MinecraftBlazorSuite.Models.LogEntries;
 
@@ -6,75 +7,88 @@ namespace MinecraftBlazorSuite.Services;
 
 public static class LogParser
 {
-    private static readonly RegexOptions CompiledRegexOptions = RegexOptions.Compiled;
-
-    private static readonly Regex joinRegex = new(@"\[(\d+:\d+:\d+)\] \[.*\]: UUID of player (\w+) is ([\w-]+)",
-        CompiledRegexOptions);
-
-    private static readonly Regex loginRegex =
-        new(@"\[(\d+:\d+:\d+)\] \[.*\]: (\w+)\[([^\]]+)\] logged in with entity id \d+ at \((\[[^\]]+\])?(.*?)\)",
-            CompiledRegexOptions);
-
-    private static readonly Regex chatRegex = new(@"\[(\d+:\d+:\d+)\] \[.*\]: <(\w+)> (.+)", CompiledRegexOptions);
-
-    private static readonly Regex commandRegex =
-        new(@"\[(\d+:\d+:\d+)\] \[.*\]: (\w+) issued server command: (.+)", CompiledRegexOptions);
-
-    private static readonly Regex connectionLostRegex =
-        new(@"\[(\d+:\d+:\d+)\] \[.*\]: (\w+) lost connection: Disconnected", CompiledRegexOptions);
-
-    private static readonly Regex playerLeftRegex =
-        new(@"\[(\d+:\d+:\d+)\] \[.*\]: (\w+) left the game", CompiledRegexOptions);
-
+    // TODO: (Dictionary rework)
     public static (LogEntryType, dynamic) ParseLogEntry(string logEntry)
     {
-        Match match;
+        Match consoleLineMatch = LogParserRegexes.PlayerJoinedRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.JoinUuid, GetJoinEntry(consoleLineMatch));
 
-        match = joinRegex.Match(logEntry);
-        if (match.Success) return (LogEntryType.JoinUUID, GetJoinEntry(match));
+        consoleLineMatch = LogParserRegexes.PlayerLoggedinRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.Login, GetLoginEntry(consoleLineMatch));
 
-        match = loginRegex.Match(logEntry);
-        if (match.Success) return (LogEntryType.Login, GetLoginEntry(match));
+        consoleLineMatch = LogParserRegexes.PlayerChatRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.Chat, GetChatEntry(consoleLineMatch));
 
-        match = chatRegex.Match(logEntry);
-        if (match.Success) return (LogEntryType.Chat, GetChatEntry(match));
+        consoleLineMatch = LogParserRegexes.PlayerCommandExecuteRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.Command, GetCommandEntry(consoleLineMatch));
 
-        match = commandRegex.Match(logEntry);
-        if (match.Success) return (LogEntryType.Command, GetCommandEntry(match));
+        consoleLineMatch = LogParserRegexes.PlayerConnectionLostRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.ConnectionLost, GetConnectionLostEntry(consoleLineMatch));
 
-        match = connectionLostRegex.Match(logEntry);
-        if (match.Success) return (LogEntryType.ConnectionLost, GetConnectionLostEntry(match));
+        consoleLineMatch = LogParserRegexes.PlayerLeftRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.PlayerLeft, GetPlayerJoinOrLeave(consoleLineMatch));
 
-        match = playerLeftRegex.Match(logEntry);
-        if (match.Success) return (LogEntryType.PlayerLeft, GetPlayerLeftEntry(match));
+        consoleLineMatch = LogParserRegexes.PlayerJoinRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.PlayerJoined, GetPlayerJoinOrLeave(consoleLineMatch));
 
-        return (LogEntryType.None, null);
+        consoleLineMatch = LogParserRegexes.ServerVersionDetectRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.ServerVersion, GetServerVersion(consoleLineMatch));
+
+        consoleLineMatch = LogParserRegexes.ServerDoneStartupRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.ServerStartupDone, GetServerStartupDone(consoleLineMatch));
+
+        consoleLineMatch = LogParserRegexes.ServerReloadCompleteRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.ServerReloadDone, GetServerReloadDone(consoleLineMatch));
+
+        consoleLineMatch = LogParserRegexes.SpongeServerRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.ServerTypeSponge, IsServerTypeSponge(consoleLineMatch));
+
+        consoleLineMatch = LogParserRegexes.CraftbukkitServerRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.ServerTypeCraftbukkit, GetSpigotServerType(consoleLineMatch));
+
+        consoleLineMatch = LogParserRegexes.ListPlayerDetectionRegex.Match(logEntry);
+        if (consoleLineMatch.Success) 
+            return (LogEntryType.PlayerListParsing, GetPlayerList(consoleLineMatch));
+
+        return (LogEntryType.None, consoleLineMatch);
     }
 
     private static (string, string, string) GetJoinEntry(Match match)
     {
-        string JoinTime = match.Groups[1].Value;
-        string PlayerName = match.Groups[2].Value;
+        string joinTime = match.Groups["loggingTime"].Value;
+        string playerName = match.Groups["playerName"].Value;
 
-        string PlayerUUID = match.Groups[3].Value;
-        return (PlayerName, PlayerUUID, JoinTime);
+        string playerUuid = match.Groups["playerUuid"].Value;
+        return (playerName, playerUuid, joinTime);
     }
 
     private static (string, string) GetLoginEntry(Match match)
     {
-        string PlayerName = match.Groups[2].Value;
-        string IPAddress = match.Groups[3].Value.Remove(0, 1);
+        string playerName = match.Groups["playerName"].Value;
+        string ipAddress = match.Groups["playerAddress"].Value.Remove(0, 1);
 
-        return (PlayerName, IPAddress);
+        return (playerName, ipAddress);
     }
 
     private static ChatLogEntry GetChatEntry(Match match)
     {
         return new ChatLogEntry
         {
-            Time = match.Groups[1].Value,
-            PlayerName = match.Groups[2].Value,
-            Message = match.Groups[3].Value
+            Time = match.Groups["loggingTime"].Value,
+            PlayerName = match.Groups["playerName"].Value,
+            Message = match.Groups["chatMessage"].Value
         };
     }
 
@@ -82,9 +96,9 @@ public static class LogParser
     {
         return new CommandLogEntry
         {
-            Time = match.Groups[1].Value,
-            PlayerName = match.Groups[2].Value,
-            Command = match.Groups[3].Value
+            Time = match.Groups["loggingTime"].Value,
+            PlayerName = match.Groups["playerName"].Value,
+            Command = match.Groups["commandMessage"].Value
         };
     }
 
@@ -92,17 +106,76 @@ public static class LogParser
     {
         return new ConnectionLostLogEntry
         {
-            Time = match.Groups[1].Value,
-            PlayerName = match.Groups[2].Value
+            Time = match.Groups["loggingTime"].Value,
+            PlayerName = match.Groups["playerName"].Value
         };
     }
 
-    private static PlayerLeftLogEntry GetPlayerLeftEntry(Match match)
+    private static string GetServerReloadDone(Match match)
     {
-        return new PlayerLeftLogEntry
+        return match.Groups["loggingTime"].Value;
+    }
+
+    private static ServerStartupDone GetServerStartupDone(Match match)
+    {
+        return new ServerStartupDone
         {
-            Time = match.Groups[1].Value,
-            PlayerName = match.Groups[2].Value
+            Time = match.Groups["loggingTime"].Value,
+            StartupDuration = match.Groups["startupDuration"].Value.Replace("s", "")
         };
+    }
+    
+    private static ServerType GetSpigotServerType(Match match)
+    {
+        string spigotServerType = match.Groups["craftbukkitServerType"].Value;
+        if(spigotServerType.Contains("Spigot", StringComparison.InvariantCultureIgnoreCase))
+        {
+            return ServerType.Spigot;
+        }
+        
+        return ServerType.Bukkit;
+    }
+    
+    private static ServerType IsServerTypeSponge(Match match)
+    {
+        string sponge = match.Groups["spongeServer"].Value;
+        if (string.Equals(sponge, "Sponge", StringComparison.InvariantCultureIgnoreCase))
+        {
+            return ServerType.Sponge;
+        }
+
+        return ServerType.Vanilla;
+    }
+
+    private static PlayerJoinLeaveEntry GetPlayerJoinOrLeave(Match match)
+    {
+        return new PlayerJoinLeaveEntry
+        {
+            Time = match.Groups["loggingTime"].Value,
+            PlayerName = match.Groups["playerName"].Value
+        };
+    }
+    
+    private static PlayerListEntry GetPlayerList(Match match)
+    {
+        string rawPlayerList = match.Groups["playerNames"].Value;
+        string[] playerList = rawPlayerList.Split(',');
+
+        playerList = playerList.Select(x => x.Trim()).ToArray();
+        PlayerListEntry players = new PlayerListEntry
+        {
+            time = match.Groups["loggingTime"].Value,
+            activePlayer = match.Groups["playerCount"].Value,
+            maxPlayers = match.Groups["maxPlayerCount"].Value,
+            players = playerList
+        };
+
+        return players;
+    }
+
+    
+    private static string GetServerVersion(Match match)
+    {
+        return match.Groups["minecraftVersion"].Value;
     }
 }

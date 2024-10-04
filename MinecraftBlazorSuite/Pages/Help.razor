@@ -1,152 +1,126 @@
 ﻿@page "/help"
 
-<MudContainer Class="mt-1">
-    <MudText Typo="Typo.h4">About MinecraftBlazorSuite</MudText>
+<MudText Typo="Typo.h5">Help</MudText>
+
+<MudDivider Class="mt-2" />
+
+<div class="mt-2">
+    <MudText Typo="Typo.h5">Intro</MudText>
     <MudText Typo="Typo.body1">
-        Welcome to MinecraftBlazorSuite!
-        We provide a growing solution for managing your Minecraft server with ease and a bit security (WIP).
+        We provide a actively growing solution for managing your Minecraft server with ease and a try to also incorporate a bit security.
+    </MudText>
+</div>
+
+<MudDivider Class="mt-3" />
+
+<div class="mt-2">
+    <MudText Typo="Typo.h5">Features</MudText>
+    <MudList T="MudText" Dense>
+        <MudListItem T="MudText">
+            <MudText Typo="Typo.body1">
+                <MudLink Href="/players">
+                    <strong>Player Management:</strong>
+                </MudLink>
+                Easily manage your players, including viewing player data and performing quick actions such as messaging, kicking, banning, or changing game modes etc.
+            </MudText>
+        </MudListItem>
+
+        <MudListItem T="MudText">
+            <MudText Typo="Typo.body1">
+                <MudLink Href="/accounts">
+                    <strong>Login:</strong>
+                </MudLink>
+                Password secured access to the panel trough a basic login feature.
+            </MudText>
+        </MudListItem>
+
+        <MudListItem T="MudText">
+            <MudText Typo="Typo.body1">
+                <MudLink Href="/management">
+                    <strong>Management:</strong>
+                </MudLink>
+                Quick problem solving buttons, you can reset the player list (emptying it) or recrawling all online players.
+                Also you can see the current memory usage and cpu usage of the server process, I don't think it is accurate but we will see..
+            </MudText>
+        </MudListItem>
+
+        <MudListItem T="MudText">
+            <MudText Typo="Typo.body1">
+                <MudLink Href="/">
+                    <strong>Console:</strong>
+                </MudLink>
+                Easy full control over your server like with a normal console but you get a custom interface just like with a professional hosting service.
+                (In the future we try to provide autocomplete functionality etc. to make your experience smoother.)
+            </MudText>
+        </MudListItem>
+
+        <MudListItem T="MudText">
+            <MudText Typo="Typo.body1">
+                <MudLink Href="/settings">
+                    <strong>Settings:</strong>
+                </MudLink>
+                Currently you can only change the panel access password there.
+            </MudText>
+        </MudListItem>
+    </MudList>
+</div>
+
+<MudDivider Class="mt-3" />
+
+<div class="mt-2">
+    <MudText Typo="Typo.h5">Technical stuff</MudText>
+    <MudList T="MudText" Dense>
+        <MudListItem T="MudText">
+            <MudText Typo="Typo.body1">
+                <strong>Tech:</strong>
+                Our Minecraft Server Wrapper is developed using C# (.NET Core 8) with Blazor Server technology.
+                I will try to update it on a regular basis, this was created by me out of the need for a simple interface.
+            </MudText>
+        </MudListItem>
+
+        <MudListItem T="MudText">
+            <MudText Typo="Typo.body1">
+                <strong>Live Information:</strong>
+                We read the processes' input and output to dynamically update the user interface, providing you with real-time information about your server.
+                So if you experience any problems or bugs, report them please so we can support any kind of minecraft server and version, let it be forge, fabric, vanilla etc.. but for that we need you :)
+            </MudText>
+        </MudListItem>
+
+        <MudListItem T="MudText">
+            <MudText Typo="Typo.body1">
+                <strong>Memory usage:</strong>
+                The wrapper itself may need a bit amount of memory, this is a thing that is hard to cut down, so if you want to use this wrapper, please have at least <u>300-500mb spare memory available</u>, the more the better.
+            </MudText>
+        </MudListItem>
+
+        <MudListItem T="MudText">
+            <MudText Typo="Typo.body1">
+                <strong>Minecraft versions:</strong>
+                I tested it with various craftbukkit, spigot, forge and fabric versions, because this is a wrapper it should work on a lot of version but if you notice a version is not working (like modded or a specific fork etc.) contact me to fix it :)
+                Currently vanilla, craftbukkit and spigot from 1.17 and up will work, anything below 1.17 has problems (no list of players, daytime is not accurate etc.) those versions won't receive support for now as I want to implement more features first.
+            </MudText>
+        </MudListItem>
+    </MudList>
+</div>
+
+<MudDivider Class="mt-3" />
+
+<div class="mt-2">
+    <MudText Typo="Typo.h5">
+        <b>Open Source</b>
     </MudText>
 
-    <div class="mt-3">
-        <MudText Typo="Typo.h5">Features</MudText>
-        <MudList T="MudText" Dense>
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    <MudLink Href="/players">
-                        <strong>Player Management:</strong>
-                    </MudLink>
+    <MudList T="string">
+        <MudListItem T="string">I offer this software free of charge, because maybe someone needs something like this or someone knows how to enhance it so I publish this to GitHub.</MudListItem>
+        <MudListItem T="string">If anyone want's to help improve this wrapper, please dont hesitate just open issues or contact me (below).</MudListItem>
+        <MudListItem T="string">Big thanks to Microsoft for Blazor and to <MudLink Target="_blank" Href="https://github.com/MudBlazor/MudBlazor">MudBlazor</MudLink> for creating this amazing library.</MudListItem>
+    </MudList>
+    
+</div>
 
-                    Our wrapper allows you to efficiently manage your players, including viewing player data and performing quick actions such as messaging, kicking, banning, or changing game modes.
-                </MudText>
-            </MudListItem>
+<MudDivider Class="mt-3" />
 
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    <MudLink Href="/accounts">
-                        <strong>(WIP) Login/Accounts:</strong>
-                    </MudLink>
-
-                    We prioritize security by offering login and account features for server owners, ensuring that your server remains protected.
-                </MudText>
-            </MudListItem>
-
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    <MudLink Href="/">
-                        <strong>Console Access:</strong>
-                    </MudLink>
-
-                    With console access, you have full control over your server like with a normal console but you get a neat interface just like with a professional hosting service.
-                    In a few updates, we even provide autocomplete functionality for the input field to make your experience smoother.
-                </MudText>
-            </MudListItem>
-
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    <MudLink Href="/settings">
-                        <strong>Settings:</strong>
-                    </MudLink>
-
-                    Currently you can reset the player list, that means it is empty and you can only manage new joined players after the clear.
-                    I will implement more settings as I notice they are needed.
-                </MudText>
-            </MudListItem>
-        </MudList>
-    </div>
-
-    <div class="mt-3">
-        <MudText Typo="Typo.h5">Technical stuff</MudText>
-        <MudList T="MudText" Clickable Dense>
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    <strong>Programming Stack:</strong>
-
-                    Our Minecraft Server Wrapper is developed using C# (.NET Core 7) with Blazor Server technology.
-                    I will try to update it on a regular basis, this was created by me out of the need for a simple interface.
-                </MudText>
-            </MudListItem>
-
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    <strong>Real-time Information:</strong>
-
-                    We read the processes' input and output to dynamically update the user interface, providing you with real-time information about your server.
-                    So if you experience any problems or bugs, report them please so we can support any kind of minecraft server and version, let it be forge, fabric, vanilla etc.. but for that we need you :)
-                </MudText>
-            </MudListItem>
-
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    <strong>Memory usage:</strong>
-
-                    The wrapper itself may use a large amount of memory, this is sadly a thing that is hard to solve so if you want to use this wrapper, please have at least 300mb memory available, the more the better (I'm working on an alternative like WASM (WebAssembly))
-                </MudText>
-            </MudListItem>
-
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    <strong>Minecraft versions:</strong>
-
-                    I tested it with various craftbukkit, spigot, forge and fabric versions, because this is a wrapper it should work on a lot of version but if you notice a version is not working (like modded or a specific fork etc.) contact me to fix it :)
-                    Currently craftbukkit and spigot from 1.17+ work, anything below 1.17 has problems (no list of players, daytime is not accurate etc.) those versions will be supported in future updates, because they changed a lot over time..
-                </MudText>
-            </MudListItem>
-        </MudList>
-    </div>
-
-    <div class="mt-3">
-        <MudText Typo="Typo.h5">
-            <b>Security</b>
-        </MudText>
-        <MudText Typo="Typo.body1">
-            While we offer (WIP) login functions and take precautions to provide secure features, it's important to understand that no software is entirely immune to potential threats or infiltration, especially in the open-source environment. If someone discovers a vulnerability, they could potentially exploit it.
-        </MudText>
-
-        <MudText Typo="Typo.body1">
-            To enhance security, we recommend taking the following measures:
-        </MudText>
-
-        <MudList T="MudText" Dense>
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    Always use strong, unique passwords for your accounts associated with the server.
-                </MudText>
-            </MudListItem>
-
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    Avoid storing sensitive data within the server wrapper or related systems.
-                </MudText>
-            </MudListItem>
-
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    Regularly monitor and review access to the web interface (the wrapper). We maintain an access log that is written to an immutable .sqlite database, providing an audit trail of user interactions (the web interface gives you no direct access to the database, it only writes the accesses).
-                </MudText>
-            </MudListItem>
-
-            <MudListItem T="MudText">
-                <MudText Typo="Typo.body1">
-                    Another <b>planned</b> feature is the possibility to deactivate individual components in a config file, so you could deactivate the console etc. completely.
-                </MudText>
-            </MudListItem>
-
-        </MudList>
-    </div>
-
-    <div class="mt-3">
-        <MudText Typo="Typo.h5">
-            <b>Open Source</b>
-        </MudText>
-
-        <MudText Typo="Typo.body1">
-            I offer this software free of charge, because maybe someone needs something like this or someone knows how to enhance it so I publish this as Open Source on github.com but I want to thank <MudLink Target="_blank" Href="https://github.com/MudBlazor/MudBlazor">MudBlazor</MudLink> for creating such an amazing library!
-        </MudText>
-    </div>
-
-    <div class="mt-3">
-        <MudText Typo="Typo.h5">Contact me</MudText>
-        <MudText Typo="Typo.body1">We value your feedback and are here to assist you with any inquiries or issues you may have. Feel free to reach out to me at <MudLink Target="_blank" Href="https://www.spigotmc.org/resources/authors/isamusoftware.283989/">spigotmc.org</MudLink> or <MudLink Target="_blank" Href="https://github.com/liebki">github.com</MudLink></MudText>
-    </div>
-
-</MudContainer>
+<div class="mt-2">
+    <MudText Typo="Typo.h5"><b>Contact me</b></MudText>
+    <MudText Typo="Typo.body1">I value your feedback, if you have any issues feel free to reach out to me at <MudLink Target="_blank" Href="https://www.spigotmc.org/resources/authors/isamusoftware.283989/">spigotmc.org</MudLink> or <MudLink Target="_blank" Href="https://github.com/liebki">github.com</MudLink>.</MudText>
+</div>

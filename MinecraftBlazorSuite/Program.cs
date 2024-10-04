@@ -1,6 +1,6 @@
 /*
     <MinecraftBlazorSuite - Minecraft Server Wrapper>
-    Copyright (C) <2023>  <liebki>
+    Copyright (C) <2024>  <liebki>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -28,20 +28,25 @@ public class Program
     {
         Console.WriteLine(
             "This software is licensed under the 'GNU AFFERO GENERAL PUBLIC LICENSE' V3.0 all details can be found under License.txt found in the same directory.");
-        Tools.GetSettings();
 
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
         builder.Services.AddRazorPages();
 
         builder.Services.AddServerSideBlazor();
-        builder.Services.AddScoped<AddressContext>();
-
-        builder.Services.AddHttpContextAccessor();
-        builder.Services.AddSingleton<ServerManagementService>();
-
-        builder.Services.AddSingleton<SqliteManager>(sp => new SqliteManager(Tools.Settings.DatabaseHashSalt));
-
         builder.Services.AddMudServices();
+        
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddScoped<AddressContext>();
+        
+        builder.Services.AddSingleton<ServerManagementService>();
+        builder.Services.AddSingleton<CryptoService>();
+        
+        builder.Services.AddSingleton<MinecraftServerStateService>();
+        builder.Services.AddSingleton<SettingsService>();
+        
+        builder.Services.AddSingleton<NotificationService>();
+        builder.Services.AddScoped<SqliteService>();
+        
         WebApplication app = builder.Build();
 
         if (!app.Environment.IsDevelopment())
