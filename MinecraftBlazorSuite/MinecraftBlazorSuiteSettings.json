@@ -1,6 +1,7 @@
 {
   "MaxConsoleMessages": 100,
-  "ServerJarPath": "/your/path/to/minecraft/server.jar",
+  "ServerJarPath": "/path/to/server.jar",
   "JavaArguments": "-Xms1G -Xmx1G -XX:+UnlockExperimentalVMOptions",
-  "PanelAccess": "$2a$14$NXRKFP8VW6SF7rCM3rEiQOx1T8Y/pMq9sxLNYgsRrxB7yL6LMt5qC"
+  "PanelAccess": "$2a$14$NXRKFP8VW6SF7rCM3rEiQOx1T8Y/pMq9sxLNYgsRrxB7yL6LMt5qC",
+  "UseLetsEncrypt": false
 }

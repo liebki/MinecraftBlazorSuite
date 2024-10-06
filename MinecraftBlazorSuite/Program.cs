@@ -1,6 +1,6 @@
 /*
     <MinecraftBlazorSuite - Minecraft Server Wrapper>
-    Copyright (C) <2024>  <liebki>
+    Copyright (C) <2024> <liebki>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -16,7 +16,9 @@
     along with this program (License.txt).  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using System.Net;
 using MinecraftBlazorSuite.Manager;
+using MinecraftBlazorSuite.Models;
 using MinecraftBlazorSuite.Services;
 using MudBlazor.Services;
 
@@ -26,6 +28,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        ServerWrapperConfig? config = Utils.ReadFile();
         Console.WriteLine(
             "This software is licensed under the 'GNU AFFERO GENERAL PUBLIC LICENSE' V3.0 all details can be found under License.txt found in the same directory.");
 
@@ -46,22 +49,47 @@ public class Program
         
         builder.Services.AddSingleton<NotificationService>();
         builder.Services.AddScoped<SqliteService>();
+
+        if (config?.UseLetsEncrypt == true)
+        {
+            builder.Services.AddLettuceEncrypt();
+        }
+
+        builder.WebHost.UseKestrel(k =>
+        {
+            if (config?.UseLetsEncrypt == true)
+            {
+                IServiceProvider appServices = k.ApplicationServices;
+                k.Listen(IPAddress.Any, 443, o => o.UseHttps(h => 
+                {
+                    h.UseLettuceEncrypt(appServices);
+                }));
+            }
+            else
+            {
+                k.Listen(IPAddress.Any, 5000);
+            }
+        });
         
         WebApplication app = builder.Build();
-
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
             app.UseHsts();
+            app.UseDeveloperExceptionPage();
         }
-
-        app.UseHttpsRedirection();
+        
+        if (config?.UseLetsEncrypt == true)
+        {
+            app.UseHttpsRedirection();
+        }
+        
         app.UseStaticFiles();
-
         app.UseRouting();
+        
         app.MapBlazorHub();
-
         app.MapFallbackToPage("/_Host");
+        
         app.Run();
     }
 }
