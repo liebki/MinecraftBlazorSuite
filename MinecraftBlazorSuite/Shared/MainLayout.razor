@@ -3,7 +3,7 @@
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 <MudThemeProvider Theme="@_theme"/>
-<MudPopoverProvider />
+<MudPopoverProvider/>
 
 <MudLayout>
 
@@ -12,17 +12,27 @@
         <MudAppBar Fixed Bottom Dense>
             @if (IsLoggedIn)
             {
-                <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.Chat" Href="/console" Match="NavLinkMatch.All" >Console</MudIconButton>
-                <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.Face" Href="/players" Match="NavLinkMatch.Prefix" >Players</MudIconButton>
-                <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.SmartButton" Href="/management" Match="NavLinkMatch.Prefix" >Management</MudIconButton>
-                <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.HelpCenter" Href="/help" Match="NavLinkMatch.Prefix" >Help</MudIconButton>
-                <MudSpacer />
+                <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.Chat" Href="/console"
+                               Match="NavLinkMatch.All">Console
+                </MudIconButton>
+                <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.Face" Href="/players"
+                               Match="NavLinkMatch.Prefix">Players
+                </MudIconButton>
+                <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.SmartButton" Href="/management"
+                               Match="NavLinkMatch.Prefix">Management
+                </MudIconButton>
+                <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.HelpCenter" Href="/help"
+                               Match="NavLinkMatch.Prefix">Help
+                </MudIconButton>
+                <MudSpacer/>
 
                 <MudButton Disabled StartIcon="@Icons.Material.Filled.Timer">
                     <UptimeDisplay/>
                 </MudButton>
-            
-                <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.Settings" Href="/settings" Match="NavLinkMatch.Prefix" Class="menu-link">Settings</MudIconButton>
+
+                <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.Settings" Href="/settings"
+                               Match="NavLinkMatch.Prefix" Class="menu-link">Settings
+                </MudIconButton>
             }
         </MudAppBar>
     </MudHidden>
@@ -32,17 +42,29 @@
         <MudDrawer Open>
             @if (IsLoggedIn)
             {
-                <MudNavMenu Style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+                <MudNavMenu
+                    Style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
                     <div>
                         <div class="text-center mt-3">
-                            <MudLink Style="color: #000 !important;" Underline="Underline.None" Target="_blank" Typo="Typo.h6" Href="https://github.com/liebki/MinecraftBlazorSuite">MinecraftBlazorSuite</MudLink>
+                            <MudLink Style="color: #000 !important;" Underline="Underline.None" Target="_blank"
+                                     Typo="Typo.h6" Href="https://github.com/liebki/MinecraftBlazorSuite">
+                                MinecraftBlazorSuite
+                            </MudLink>
                         </div>
 
                         <MudDivider Class="my-2"/>
-                        <MudNavLink IconColor="Color.Dark" Icon="@Icons.Material.Filled.Chat" Href="/console" Match="NavLinkMatch.All" Class="menu-link">Console</MudNavLink>
-                        <MudNavLink IconColor="Color.Dark" Icon="@Icons.Material.Filled.Face" Href="/players" Match="NavLinkMatch.Prefix" Class="menu-link">Players</MudNavLink>
-                        <MudNavLink IconColor="Color.Dark" Icon="@Icons.Material.Filled.SmartButton" Href="/management" Match="NavLinkMatch.Prefix" Class="menu-link">Management</MudNavLink>
-                        <MudNavLink IconColor="Color.Dark" Icon="@Icons.Material.Filled.HelpCenter" Href="/help" Match="NavLinkMatch.Prefix" Class="menu-link">Help</MudNavLink>
+                        <MudNavLink IconColor="Color.Dark" Icon="@Icons.Material.Filled.Chat" Href="/console"
+                                    Match="NavLinkMatch.All" Class="menu-link">Console
+                        </MudNavLink>
+                        <MudNavLink IconColor="Color.Dark" Icon="@Icons.Material.Filled.Face" Href="/players"
+                                    Match="NavLinkMatch.Prefix" Class="menu-link">Players
+                        </MudNavLink>
+                        <MudNavLink IconColor="Color.Dark" Icon="@Icons.Material.Filled.SmartButton" Href="/management"
+                                    Match="NavLinkMatch.Prefix" Class="menu-link">Management
+                        </MudNavLink>
+                        <MudNavLink IconColor="Color.Dark" Icon="@Icons.Material.Filled.HelpCenter" Href="/help"
+                                    Match="NavLinkMatch.Prefix" Class="menu-link">Help
+                        </MudNavLink>
                     </div>
 
                     <div style="display: flex; flex-direction: column;">
@@ -52,14 +74,16 @@
                             </MudNavLink>
                         </MudTooltip>
 
-                        <MudNavLink IconColor="Color.Dark" Icon="@Icons.Material.Filled.Settings" Href="/settings" Match="NavLinkMatch.Prefix" Class="menu-link">Settings</MudNavLink>
+                        <MudNavLink IconColor="Color.Dark" Icon="@Icons.Material.Filled.Settings" Href="/settings"
+                                    Match="NavLinkMatch.Prefix" Class="menu-link">Settings
+                        </MudNavLink>
                     </div>
 
                 </MudNavMenu>
             }
         </MudDrawer>
     </MudHidden>
-    
+
     <MudMainContent Style="padding-top: 10px; padding-bottom: 60px;">
         @Body
     </MudMainContent>

@@ -2,7 +2,7 @@
 
 <MudText Typo="Typo.h5">Console</MudText>
 
-<MudDivider Class="mt-2" />
+<MudDivider Class="mt-2"/>
 
 <div class="mt-2">
     @switch (ServerStateService.GetCurrentServerState())
@@ -21,51 +21,89 @@
     }
 </div>
 
-<MudDivider Class="mt-2" />
+<MudDivider Class="mt-2"/>
 
-    @* Phone *@
-    <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
-        <MudButtonGroup Size="Size.Small"  Class="mt-2" OverrideStyles="false">
-            <MudMenu Disabled="ServerStateService.AreControlsLocked" AnchorOrigin="Origin.TopCenter" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Timer" Variant="Variant.Filled" Label="Daytime">
-                <MudMenuItem IconColor="Color.Warning" Icon="@Icons.Material.Filled.Lightbulb" OnClick=@(() => SendCommand(command:"time set day", showExecution:false))>Day</MudMenuItem>
-                <MudMenuItem IconColor="Color.Info" Icon="@Icons.Material.Filled.Light" OnClick=@(() => SendCommand(command:"time set noon", showExecution:false))>Noon</MudMenuItem>
-                <MudMenuItem IconColor="Color.Primary" Icon="@Icons.Material.Filled.Nightlight" OnClick=@(() => SendCommand(command:"time set night", showExecution:false))>Night</MudMenuItem>
-                <MudMenuItem IconColor="Color.Dark" Icon="@Icons.Material.Filled.Bed" OnClick=@(() => SendCommand(command:"time set midnight", showExecution:false))>Midnight</MudMenuItem>
-            </MudMenu>
+@* Phone *@
+<MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
+    <MudButtonGroup Size="Size.Small" Class="mt-2" OverrideStyles="false">
+        <MudMenu Disabled="ServerStateService.AreControlsLocked" AnchorOrigin="Origin.TopCenter" Color="Color.Tertiary"
+                 StartIcon="@Icons.Material.Filled.Timer" Variant="Variant.Filled" Label="Daytime">
+            <MudMenuItem IconColor="Color.Warning" Icon="@Icons.Material.Filled.Lightbulb"
+                         OnClick=@(() => SendCommand(command: "time set day", showExecution: false))>Day
+            </MudMenuItem>
+            <MudMenuItem IconColor="Color.Info" Icon="@Icons.Material.Filled.Light"
+                         OnClick=@(() => SendCommand(command: "time set noon", showExecution: false))>Noon
+            </MudMenuItem>
+            <MudMenuItem IconColor="Color.Primary" Icon="@Icons.Material.Filled.Nightlight"
+                         OnClick=@(() => SendCommand(command: "time set night", showExecution: false))>Night
+            </MudMenuItem>
+            <MudMenuItem IconColor="Color.Dark" Icon="@Icons.Material.Filled.Bed"
+                         OnClick=@(() => SendCommand(command: "time set midnight", showExecution: false))>Midnight
+            </MudMenuItem>
+        </MudMenu>
 
-            <MudMenu Disabled="ServerStateService.AreControlsLocked" AnchorOrigin="Origin.TopCenter" Color="Color.Info" StartIcon="@Icons.Material.Filled.Article" Variant="Variant.Filled" Label="Weather">
-                <MudMenuItem IconColor="Color.Warning" Icon="@Icons.Material.Filled.WbSunny" OnClick=@(() => SendCommand(command:"weather clear", showExecution:false))>Clear</MudMenuItem>
-                <MudMenuItem IconColor="Color.Info" Icon="@Icons.Material.Filled.WaterDrop" OnClick=@(() => SendCommand(command:"weather rain", showExecution:false))>Rain</MudMenuItem>
-                <MudMenuItem IconColor="Color.Primary" Icon="@Icons.Material.Filled.Thunderstorm" OnClick=@(() => SendCommand(command:"weather thunder", showExecution:false))>Thunder</MudMenuItem>
-            </MudMenu>
-            
-            <MudButton Disabled="ServerStateService.AreControlsLocked" IconColor="Color.Dark" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Save" OnClick=@(() => SendCommand(command:"save-all", showExecution:false))>Save World</MudButton>
-            
-        </MudButtonGroup>
-    </MudHidden>
+        <MudMenu Disabled="ServerStateService.AreControlsLocked" AnchorOrigin="Origin.TopCenter" Color="Color.Info"
+                 StartIcon="@Icons.Material.Filled.Article" Variant="Variant.Filled" Label="Weather">
+            <MudMenuItem IconColor="Color.Warning" Icon="@Icons.Material.Filled.WbSunny"
+                         OnClick=@(() => SendCommand(command: "weather clear", showExecution: false))>Clear
+            </MudMenuItem>
+            <MudMenuItem IconColor="Color.Info" Icon="@Icons.Material.Filled.WaterDrop"
+                         OnClick=@(() => SendCommand(command: "weather rain", showExecution: false))>Rain
+            </MudMenuItem>
+            <MudMenuItem IconColor="Color.Primary" Icon="@Icons.Material.Filled.Thunderstorm"
+                         OnClick=@(() => SendCommand(command: "weather thunder", showExecution: false))>Thunder
+            </MudMenuItem>
+        </MudMenu>
 
-    @* Notebook+ *@
-    <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="false">
-        <MudButtonGroup Size="Size.Medium"  Class="mt-2" OverrideStyles="false">
-            <MudMenu Disabled="ServerStateService.AreControlsLocked" AnchorOrigin="Origin.TopCenter" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Timer" Variant="Variant.Filled" Label="Change daytime">
-                <MudMenuItem IconColor="Color.Warning" Icon="@Icons.Material.Filled.Lightbulb" OnClick=@(() => SendCommand(command:"time set day", showExecution:false))>Day</MudMenuItem>
-                <MudMenuItem IconColor="Color.Info" Icon="@Icons.Material.Filled.Light" OnClick=@(() => SendCommand(command:"time set noon", showExecution:false))>Noon</MudMenuItem>
-                <MudMenuItem IconColor="Color.Primary" Icon="@Icons.Material.Filled.Nightlight" OnClick=@(() => SendCommand(command:"time set night", showExecution:false))>Night</MudMenuItem>
-                <MudMenuItem IconColor="Color.Dark" Icon="@Icons.Material.Filled.Bed" OnClick=@(() => SendCommand(command:"time set midnight", showExecution:false))>Midnight</MudMenuItem>
-            </MudMenu>
+        <MudButton Disabled="ServerStateService.AreControlsLocked" IconColor="Color.Dark" Variant="Variant.Filled"
+                   Color="Color.Success" StartIcon="@Icons.Material.Filled.Save"
+                   OnClick=@(() => SendCommand(command: "save-all", showExecution: false))>Save World
+        </MudButton>
 
-            <MudMenu Disabled="ServerStateService.AreControlsLocked" AnchorOrigin="Origin.TopCenter" Color="Color.Info" StartIcon="@Icons.Material.Filled.Article" Variant="Variant.Filled" Label="Change weather">
-                <MudMenuItem IconColor="Color.Warning" Icon="@Icons.Material.Filled.WbSunny" OnClick=@(() => SendCommand(command:"weather clear", showExecution:false))>Clear</MudMenuItem>
-                <MudMenuItem IconColor="Color.Info" Icon="@Icons.Material.Filled.WaterDrop" OnClick=@(() => SendCommand(command:"weather rain", showExecution:false))>Rain</MudMenuItem>
-                <MudMenuItem IconColor="Color.Primary" Icon="@Icons.Material.Filled.Thunderstorm" OnClick=@(() => SendCommand(command:"weather thunder", showExecution:false))>Thunder</MudMenuItem>
-            </MudMenu>
+    </MudButtonGroup>
+</MudHidden>
 
-            <MudButton Disabled="ServerStateService.AreControlsLocked" IconColor="Color.Dark" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Save" OnClick=@(() => SendCommand(command:"save-all", showExecution:false))>Save World</MudButton>
+@* Notebook+ *@
+<MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="false">
+    <MudButtonGroup Size="Size.Medium" Class="mt-2" OverrideStyles="false">
+        <MudMenu Disabled="ServerStateService.AreControlsLocked" AnchorOrigin="Origin.TopCenter" Color="Color.Tertiary"
+                 StartIcon="@Icons.Material.Filled.Timer" Variant="Variant.Filled" Label="Change daytime">
+            <MudMenuItem IconColor="Color.Warning" Icon="@Icons.Material.Filled.Lightbulb"
+                         OnClick=@(() => SendCommand(command: "time set day", showExecution: false))>Day
+            </MudMenuItem>
+            <MudMenuItem IconColor="Color.Info" Icon="@Icons.Material.Filled.Light"
+                         OnClick=@(() => SendCommand(command: "time set noon", showExecution: false))>Noon
+            </MudMenuItem>
+            <MudMenuItem IconColor="Color.Primary" Icon="@Icons.Material.Filled.Nightlight"
+                         OnClick=@(() => SendCommand(command: "time set night", showExecution: false))>Night
+            </MudMenuItem>
+            <MudMenuItem IconColor="Color.Dark" Icon="@Icons.Material.Filled.Bed"
+                         OnClick=@(() => SendCommand(command: "time set midnight", showExecution: false))>Midnight
+            </MudMenuItem>
+        </MudMenu>
 
-        </MudButtonGroup>
-    </MudHidden>
+        <MudMenu Disabled="ServerStateService.AreControlsLocked" AnchorOrigin="Origin.TopCenter" Color="Color.Info"
+                 StartIcon="@Icons.Material.Filled.Article" Variant="Variant.Filled" Label="Change weather">
+            <MudMenuItem IconColor="Color.Warning" Icon="@Icons.Material.Filled.WbSunny"
+                         OnClick=@(() => SendCommand(command: "weather clear", showExecution: false))>Clear
+            </MudMenuItem>
+            <MudMenuItem IconColor="Color.Info" Icon="@Icons.Material.Filled.WaterDrop"
+                         OnClick=@(() => SendCommand(command: "weather rain", showExecution: false))>Rain
+            </MudMenuItem>
+            <MudMenuItem IconColor="Color.Primary" Icon="@Icons.Material.Filled.Thunderstorm"
+                         OnClick=@(() => SendCommand(command: "weather thunder", showExecution: false))>Thunder
+            </MudMenuItem>
+        </MudMenu>
 
-<MudDivider Class="mt-2" />
+        <MudButton Disabled="ServerStateService.AreControlsLocked" IconColor="Color.Dark" Variant="Variant.Filled"
+                   Color="Color.Success" StartIcon="@Icons.Material.Filled.Save"
+                   OnClick=@(() => SendCommand(command: "save-all", showExecution: false))>Save World
+        </MudButton>
+
+    </MudButtonGroup>
+</MudHidden>
+
+<MudDivider Class="mt-2"/>
 
 
 @* Phone *@
@@ -76,39 +114,58 @@
             <MudList ReadOnly T="MudListItem<string>" Dense>
                 @foreach ((string consoleLineContent, LogEntryType lineType) it in _consoleContent)
                 {
-                // For every case, something else can be done in the consoles messages view
-                @switch (it.lineType)
-                {
-                case LogEntryType.Chat:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.ChatBubble" IconColor="Color.Info" Text="@it.consoleLineContent"/>
-                break;
+                    // For every case, something else can be done in the consoles messages view
+                    @switch (it.lineType)
+                    {
+                        case LogEntryType.Chat:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.ChatBubble" IconColor="Color.Info"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.PlayerJoined:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.Add" IconColor="Color.Success" Text="@it.consoleLineContent"/>
-                break;
+                        case LogEntryType.PlayerJoined:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.Add" IconColor="Color.Success"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.Command:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.LabelImportant" IconColor="Color.Warning" Text="@it.consoleLineContent"/>
-                break;
+                        case LogEntryType.Command:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.LabelImportant" IconColor="Color.Warning"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.PlayerLeft:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error" Text="@it.consoleLineContent"/>
-                break;
+                        case LogEntryType.PlayerLeft:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.ServerStartupDone:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.DoneAll" IconColor="Color.Success" Text="@it.consoleLineContent"/>
-                break;
+                        case LogEntryType.ServerStartupDone:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.DoneAll" IconColor="Color.Success"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.ServerReloadDone:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.Done" IconColor="Color.Success" Text="@it.consoleLineContent"/>
-                break;
+                        case LogEntryType.ServerReloadDone:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.Done" IconColor="Color.Success"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.None:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")">
-                    <ChildContent>@((MarkupString)it.consoleLineContent)</ChildContent>
-                </MudListItem>
-                break;
-                }
+                        case LogEntryType.None:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")">
+                                <ChildContent>@((MarkupString)it.consoleLineContent)</ChildContent>
+                            </MudListItem>
+                            break;
+                    }
                 }
             </MudList>
         </div>
@@ -123,39 +180,58 @@
             <MudList ReadOnly T="MudListItem<string>" Dense>
                 @foreach ((string consoleLineContent, LogEntryType lineType) it in _consoleContent)
                 {
-                // For every case, something else can be done in the consoles messages view
-                @switch (it.lineType)
-                {
-                case LogEntryType.Chat:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.ChatBubble" IconColor="Color.Info" Text="@it.consoleLineContent"/>
-                break;
+                    // For every case, something else can be done in the consoles messages view
+                    @switch (it.lineType)
+                    {
+                        case LogEntryType.Chat:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.ChatBubble" IconColor="Color.Info"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.PlayerJoined:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.Add" IconColor="Color.Success" Text="@it.consoleLineContent"/>
-                break;
+                        case LogEntryType.PlayerJoined:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.Add" IconColor="Color.Success"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.Command:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.LabelImportant" IconColor="Color.Warning" Text="@it.consoleLineContent"/>
-                break;
+                        case LogEntryType.Command:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.LabelImportant" IconColor="Color.Warning"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.PlayerLeft:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error" Text="@it.consoleLineContent"/>
-                break;
+                        case LogEntryType.PlayerLeft:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.ServerStartupDone:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.DoneAll" IconColor="Color.Success" Text="@it.consoleLineContent"/>
-                break;
+                        case LogEntryType.ServerStartupDone:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.DoneAll" IconColor="Color.Success"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.ServerReloadDone:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")" Icon="@Icons.Material.Filled.Done" IconColor="Color.Success" Text="@it.consoleLineContent"/>
-                break;
+                        case LogEntryType.ServerReloadDone:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")"
+                                Icon="@Icons.Material.Filled.Done" IconColor="Color.Success"
+                                Text="@it.consoleLineContent"/>
+                            break;
 
-                case LogEntryType.None:
-                <MudListItem Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")">
-                    <ChildContent>@((MarkupString)it.consoleLineContent)</ChildContent>
-                </MudListItem>
-                break;
-                }
+                        case LogEntryType.None:
+                            <MudListItem
+                                Class="@(_consoleContent.IndexOf(it) % 2 == 0 ? "list-item-even" : "list-item-odd")">
+                                <ChildContent>@((MarkupString)it.consoleLineContent)</ChildContent>
+                            </MudListItem>
+                            break;
+                    }
                 }
             </MudList>
         </div>
@@ -164,19 +240,30 @@
 
 
 <div class="mt-3">
-    <MudTextField Disabled="ServerStateService.AreControlsLocked" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Code" HelperText="Type in any command you want, then press 'EXECUTE' below" @bind-Value="CommandInput"/>
-    
+    <MudTextField Disabled="ServerStateService.AreControlsLocked" Adornment="Adornment.Start"
+                  AdornmentIcon="@Icons.Material.Filled.Code"
+                  HelperText="Type in any command you want, then press 'EXECUTE' below" @bind-Value="CommandInput"/>
+
     @* Phone *@
     <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
         <MudButtonGroup Size="Size.Small" Class="mt-2" OverrideStyles="false">
             @if (ServerStateService.GetCurrentServerState() == ServerStates.Offline)
             {
-                <MudButton Color="Color.Info" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Power" OnClick="() => StartServerExec()">Power-On</MudButton>
+                <MudButton Color="Color.Info" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Power"
+                           OnClick="() => StartServerExec()">Power-On
+                </MudButton>
             }
-            
-            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Success" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Code" OnClick="() => SendCommand(true)">Execute</MudButton>
-            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Error" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Stop" OnClick="@SendStopCommand">Stop</MudButton>
-            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Warning" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.RestartAlt" OnClick=@(() => SendCommand(command: "reload", showExecution: false))>Reload</MudButton>
+
+            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Success" Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Code" OnClick="() => SendCommand(true)">Execute
+            </MudButton>
+            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Error" Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Stop" OnClick="@SendStopCommand">Stop
+            </MudButton>
+            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Warning" Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.RestartAlt"
+                       OnClick=@(() => SendCommand(command: "reload", showExecution: false))>Reload
+            </MudButton>
         </MudButtonGroup>
     </MudHidden>
 
@@ -185,12 +272,21 @@
         <MudButtonGroup Size="Size.Medium" Class="mt-5" OverrideStyles="false">
             @if (ServerStateService.GetCurrentServerState() == ServerStates.Offline)
             {
-            <MudButton Color="Color.Info" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Power" OnClick="() => StartServerExec()">Power-On</MudButton>
+                <MudButton Color="Color.Info" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Power"
+                           OnClick="() => StartServerExec()">Power-On
+                </MudButton>
             }
 
-            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Success" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Code" OnClick="() => SendCommand(true)">Execute</MudButton>
-            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Error" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Stop" OnClick="@SendStopCommand" >Stop</MudButton>
-            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Warning" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.RestartAlt" OnClick=@(() => SendCommand(command:"reload", showExecution:false))>Reload</MudButton>
+            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Success" Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Code" OnClick="() => SendCommand(true)">Execute
+            </MudButton>
+            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Error" Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Stop" OnClick="@SendStopCommand">Stop
+            </MudButton>
+            <MudButton Disabled="ServerStateService.AreControlsLocked" Color="Color.Warning" Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.RestartAlt"
+                       OnClick=@(() => SendCommand(command: "reload", showExecution: false))>Reload
+            </MudButton>
         </MudButtonGroup>
     </MudHidden>
 </div>

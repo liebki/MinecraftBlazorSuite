@@ -1,6 +1,6 @@
 {
   "MaxConsoleMessages": 100,
-  "ServerJarPath": "/path/to/server.jar",
+  "ServerJarPath": "/Users/kim/Downloads/spigot/spigot-1.21.jar",
   "JavaArguments": "-Xms1G -Xmx1G -XX:+UnlockExperimentalVMOptions",
   "PanelAccess": "$2a$14$NXRKFP8VW6SF7rCM3rEiQOx1T8Y/pMq9sxLNYgsRrxB7yL6LMt5qC",
   "UseLetsEncrypt": false

@@ -2,118 +2,179 @@
 
 <MudText Typo="Typo.h5">Players</MudText>
 
-<MudDivider Class="mt-2" />
+<MudDivider Class="mt-2"/>
 
 <div class="mt-2">
     <MudExpansionPanels Elevation="3">
         @if (MinecraftServerService.Spielerliste.Count > 0)
         {
-                @foreach (LoginLogEntry spline in MinecraftServerService.Spielerliste)
-                {
-                    <MudExpansionPanel Class="mt-1" Style="background-color: #757575;">
-                        <TitleContent>
+            @foreach (LoginLogEntry spline in MinecraftServerService.Spielerliste)
+            {
+                <MudExpansionPanel Class="mt-1" Style="background-color: #757575;">
+                    <TitleContent>
 
-                            @* Phone *@
-                            <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
-                                <div style="display: flex; align-items: center;">
-                                    <img alt="@spline.PlayerName" src=@Utils.GetUserSkin(spline.UUID, spline.PlayerName, SkinSelectionType.Avatar, 30) style="margin-right: 10px;"/>
-                                    <MudText Style="color: #ECF0F1;" Typo="Typo.h6">@spline.PlayerName</MudText>
-                                </div>
-                            </MudHidden>
+                        @* Phone *@
+                        <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
+                            <div style="display: flex; align-items: center;">
+                                <img alt="@spline.PlayerName"
+                                     src=@Utils.GetUserSkin(spline.UUID, spline.PlayerName, SkinSelectionType.Avatar, 30)
+                                     style="margin-right: 10px;"/>
+                                <MudText Style="color: #ECF0F1;" Typo="Typo.h6">@spline.PlayerName</MudText>
+                            </div>
+                        </MudHidden>
 
-                            @* Notebook *@
-                            <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="false">
-                                <div style="display: flex; align-items: center;">
-                                    <img alt="@spline.PlayerName" src=@Utils.GetUserSkin(spline.UUID, spline.PlayerName, SkinSelectionType.Avatar, 40) style="margin-right: 10px;"/>
-                                    <MudText Style="color: #ECF0F1;" Typo="Typo.h5">@spline.PlayerName</MudText>
-                                </div>
-                            </MudHidden>
-                            
-                        </TitleContent>
+                        @* Notebook *@
+                        <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="false">
+                            <div style="display: flex; align-items: center;">
+                                <img alt="@spline.PlayerName"
+                                     src=@Utils.GetUserSkin(spline.UUID, spline.PlayerName, SkinSelectionType.Avatar, 40)
+                                     style="margin-right: 10px;"/>
+                                <MudText Style="color: #ECF0F1;" Typo="Typo.h5">@spline.PlayerName</MudText>
+                            </div>
+                        </MudHidden>
 
-                        <ChildContent>
-                            @* Phone *@
-                            <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
+                    </TitleContent>
 
-                                <MudDivider />
+                    <ChildContent>
+                        @* Phone *@
+                        <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
 
-                                <div class="mt-1" >
-                                    <MudText Style="color: #ECF0F1;" Typo="Typo.body2">@($"UUID: {spline.UUID}")</MudText>
-                                    <MudText Style="color: #ECF0F1;" Typo="Typo.body2">@($"Address/Port: {spline.IPAddress}")</MudText>
-                                    <MudText Style="color: #ECF0F1;" Typo="Typo.body2">@($"Time of join: {spline.Time}")</MudText>
-                                </div>
+                            <MudDivider/>
 
-                                <MudDivider Class="mt-1"/>
+                            <div class="mt-1">
+                                <MudText Style="color: #ECF0F1;" Typo="Typo.body2">@($"UUID: {spline.UUID}")</MudText>
+                                <MudText Style="color: #ECF0F1;"
+                                         Typo="Typo.body2">@($"Address/Port: {spline.IPAddress}")</MudText>
+                                <MudText Style="color: #ECF0F1;"
+                                         Typo="Typo.body2">@($"Time of join: {spline.Time}")</MudText>
+                            </div>
 
-                                <MudButtonGroup Class="mt-1" Size="Size.Medium" OverrideStyles="false">
-                                    <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Message" Color="Color.Tertiary" OnClick="@(() => SendMessage(spline.PlayerName))">Message</MudButton>
-                                    <MudButton Style="color: #ECF0F1;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Mode" Color="Color.Info" OnClick="@(() => ChangeGamemode(spline.PlayerName))">Gamemode</MudButton>
+                            <MudDivider Class="mt-1"/>
+
+                            <MudButtonGroup Class="mt-1" Size="Size.Medium" OverrideStyles="false">
+                                <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                           StartIcon="@Icons.Material.Filled.Message" Color="Color.Tertiary"
+                                           OnClick="@(() => SendMessage(spline.PlayerName))">Message
+                                </MudButton>
+                                <MudButton Style="color: #ECF0F1;" Variant="Variant.Filled"
+                                           StartIcon="@Icons.Material.Filled.Mode" Color="Color.Info"
+                                           OnClick="@(() => ChangeGamemode(spline.PlayerName))">Gamemode
+                                </MudButton>
+                            </MudButtonGroup>
+
+                            <MudButtonGroup Size="Size.Medium" Class="mt-3" OverrideStyles="false">
+                                <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                           StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error"
+                                           OnClick="@(() => KillPlayer(spline.PlayerName))">Kill
+                                </MudButton>
+                                <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                           StartIcon="@Icons.Material.Filled.MonitorHeart" Color="Color.Success"
+                                           OnClick="@(() => HealPlayer(spline.PlayerName))">Heal
+                                </MudButton>
+                            </MudButtonGroup>
+
+                            <MudButtonGroup Size="Size.Medium" Class="mt-3" OverrideStyles="false">
+                                <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                           StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning"
+                                           OnClick="@(() => KickWithMessage(spline.PlayerName))">Kick
+                                </MudButton>
+                                <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                           StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning"
+                                           OnClick="@(() => BanWithMessage(spline.PlayerName))">Ban
+                                </MudButton>
+                            </MudButtonGroup>
+
+                            <MudButtonGroup Size="Size.Medium" Class="mt-3" OverrideStyles="false">
+                                <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                           StartIcon="@Icons.Material.Filled.Message" Color="Color.Success"
+                                           OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, true))">OP
+                                </MudButton>
+                                <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                           StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning"
+                                           OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, false))">DE-OP
+                                </MudButton>
+                            </MudButtonGroup>
+                        </MudHidden>
+
+                        @* Notebook *@
+                        <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="false">
+
+                            <MudDivider/>
+
+                            <div class="mt-1">
+                                <MudText Style="color: #ECF0F1;" Class="mt-2"
+                                         Typo="Typo.body2">@($"UUID: {spline.UUID}")</MudText>
+                                <MudText Style="color: #ECF0F1;"
+                                         Typo="Typo.body2">@($"Address/Port: {spline.IPAddress}")</MudText>
+                                <MudText Style="color: #ECF0F1;"
+                                         Typo="Typo.body2">@($"Time of join: {spline.Time}")</MudText>
+                            </div>
+
+                            <MudDivider Class="mt-1"/>
+
+                            <div Class="mt-1">
+                                <MudButtonGroup Size="Size.Medium" OverrideStyles="false">
+                                    <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                               StartIcon="@Icons.Material.Filled.Message" Color="Color.Tertiary"
+                                               OnClick="@(() => SendMessage(spline.PlayerName))">Send Message
+                                    </MudButton>
+                                    <MudButton Style="color: #ECF0F1;" Variant="Variant.Filled"
+                                               StartIcon="@Icons.Material.Filled.Mode" Color="Color.Info"
+                                               OnClick="@(() => ChangeGamemode(spline.PlayerName))">Change Gamemode
+                                    </MudButton>
                                 </MudButtonGroup>
 
-                                <MudButtonGroup Size="Size.Medium" Class="mt-3" OverrideStyles="false">
-                                    <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => KillPlayer(spline.PlayerName))">Kill</MudButton>
-                                    <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.MonitorHeart" Color="Color.Success" OnClick="@(() => HealPlayer(spline.PlayerName))">Heal</MudButton>
+                                <MudButtonGroup Size="Size.Medium" OverrideStyles="false">
+                                    <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                               StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error"
+                                               OnClick="@(() => KillPlayer(spline.PlayerName))">Kill
+                                    </MudButton>
+                                    <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                               StartIcon="@Icons.Material.Filled.MonitorHeart" Color="Color.Success"
+                                               OnClick="@(() => HealPlayer(spline.PlayerName))">Heal
+                                    </MudButton>
                                 </MudButtonGroup>
 
-                                <MudButtonGroup Size="Size.Medium" Class="mt-3" OverrideStyles="false">
-                                    <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning" OnClick="@(() => KickWithMessage(spline.PlayerName))">Kick</MudButton>
-                                    <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning" OnClick="@(() => BanWithMessage(spline.PlayerName))">Ban</MudButton>
+                                <MudButtonGroup Size="Size.Medium" OverrideStyles="false">
+                                    <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                               StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning"
+                                               OnClick="@(() => KickWithMessage(spline.PlayerName))">Kick
+                                    </MudButton>
+                                    <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                               StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning"
+                                               OnClick="@(() => BanWithMessage(spline.PlayerName))">Ban
+                                    </MudButton>
                                 </MudButtonGroup>
 
-                                <MudButtonGroup Size="Size.Medium" Class="mt-3" OverrideStyles="false">
-                                    <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Message" Color="Color.Success" OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, true))">OP</MudButton>
-                                    <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning" OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, false))">DE-OP</MudButton>
+                                <MudButtonGroup Size="Size.Medium" OverrideStyles="false">
+                                    <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                               StartIcon="@Icons.Material.Filled.Message" Color="Color.Success"
+                                               OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, true))">Give OP
+                                    </MudButton>
+                                    <MudButton Style="color: #212121;" Variant="Variant.Filled"
+                                               StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning"
+                                               OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, false))">Remove
+                                        OP
+                                    </MudButton>
                                 </MudButtonGroup>
-                            </MudHidden>
+                            </div>
 
-                            @* Notebook *@
-                            <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="false">
+                        </MudHidden>
 
-                                <MudDivider />
-
-                                <div class="mt-1" >
-                                    <MudText Style="color: #ECF0F1;" Class="mt-2" Typo="Typo.body2">@($"UUID: {spline.UUID}")</MudText>
-                                    <MudText Style="color: #ECF0F1;" Typo="Typo.body2">@($"Address/Port: {spline.IPAddress}")</MudText>
-                                    <MudText Style="color: #ECF0F1;" Typo="Typo.body2">@($"Time of join: {spline.Time}")</MudText>
-                                </div>
-
-                                <MudDivider Class="mt-1"/>
-
-                                <div Class="mt-1">
-                                    <MudButtonGroup Size="Size.Medium" OverrideStyles="false">
-                                        <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Message" Color="Color.Tertiary" OnClick="@(() => SendMessage(spline.PlayerName))">Send Message</MudButton>
-                                        <MudButton Style="color: #ECF0F1;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Mode" Color="Color.Info" OnClick="@(() => ChangeGamemode(spline.PlayerName))">Change Gamemode</MudButton>
-                                    </MudButtonGroup>
-
-                                    <MudButtonGroup Size="Size.Medium" OverrideStyles="false">
-                                        <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => KillPlayer(spline.PlayerName))">Kill</MudButton>
-                                        <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.MonitorHeart" Color="Color.Success" OnClick="@(() => HealPlayer(spline.PlayerName))">Heal</MudButton>
-                                    </MudButtonGroup>
-
-                                    <MudButtonGroup Size="Size.Medium" OverrideStyles="false">
-                                        <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning" OnClick="@(() => KickWithMessage(spline.PlayerName))">Kick</MudButton>
-                                        <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning" OnClick="@(() => BanWithMessage(spline.PlayerName))">Ban</MudButton>
-                                    </MudButtonGroup>
-
-                                    <MudButtonGroup Size="Size.Medium" OverrideStyles="false">
-                                        <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Message" Color="Color.Success" OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, true))">Give OP</MudButton>
-                                        <MudButton Style="color: #212121;" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Message" Color="Color.Warning" OnClick="@(() => ChangeOperatorStatus(spline.PlayerName, false))">Remove OP</MudButton>
-                                    </MudButtonGroup>
-                                </div>
-                                
-                            </MudHidden>
-
-                        </ChildContent>
-                    </MudExpansionPanel>
-                }
+                    </ChildContent>
+                </MudExpansionPanel>
+            }
         }
         else
         {
-        <MudExpansionPanel HideIcon Dense Class="mt-1" Style="background-color: #c4c4c4;">
-            <TitleContent>
-                <MudText>No players online, wait or try <MudLink Href="/management">recrawling</MudLink> if you know players are online :)</MudText>
-            </TitleContent>
-        </MudExpansionPanel>
+            <MudExpansionPanel HideIcon Dense Class="mt-1" Style="background-color: #c4c4c4;">
+                <TitleContent>
+                    <MudText>No players online, wait or try
+                        <MudLink Href="/management">recrawling</MudLink>
+                        if you know players are online :)
+                    </MudText>
+                </TitleContent>
+            </MudExpansionPanel>
         }
     </MudExpansionPanels>
 </div>

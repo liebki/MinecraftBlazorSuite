@@ -6,10 +6,10 @@ namespace MinecraftBlazorSuite.Manager;
 
 public class Utils
 {
-    public static string AppSettingsFile  { get; } = "MinecraftBlazorSuiteSettings.json";
-    
+    public static string AppSettingsFile { get; } = "MinecraftBlazorSuiteSettings.json";
+
     /// <summary>
-    /// Uses mc-heads.net to get the heads of minecraft skins
+    /// Uses minotar.net to get the heads of minecraft skins
     /// </summary>
     /// <param name="uuid"></param>
     /// <param name="username"></param>
@@ -19,29 +19,23 @@ public class Utils
     public static string GetUserSkin(string uuid, string username, SkinSelectionType userSelection, int size)
     {
         if (string.IsNullOrEmpty(uuid))
-        {
             return userSelection switch
             {
-                SkinSelectionType.Head => $"https://mc-heads.net/head/{username}/{size}",
-                SkinSelectionType.Avatar => $"https://mc-heads.net/avatar/{username}/{size}",
-                SkinSelectionType.Skin => $"https://mc-heads.net/player/{username}/{size}",
-                SkinSelectionType.Combo => $"https://mc-heads.net/combo/{username}/{size}",
-                _ => $"https://mc-heads.net/avatar/{username}/{size}"
+                SkinSelectionType.Head => $"https://minotar.net/avatar/{username}/{size}",
+                SkinSelectionType.Skin => $"https://minotar.net/body/{username}/{size}",
+                _ => $"https://minotar.net/avatar/{username}/{size}"
             };
-        }
-        
+
         return userSelection switch
         {
-            SkinSelectionType.Head => $"https://mc-heads.net/head/{uuid}/{size}",
-            SkinSelectionType.Avatar => $"https://mc-heads.net/avatar/{uuid}/{size}",
-            SkinSelectionType.Skin => $"https://mc-heads.net/player/{uuid}/{size}",
-            SkinSelectionType.Combo => $"https://mc-heads.net/combo/{uuid}/{size}",
-            _ => $"https://mc-heads.net/avatar/{uuid}/{size}"
+            SkinSelectionType.Head => $"https://minotar.net/avatar/{uuid}/{size}",
+            SkinSelectionType.Skin => $"https://minotar.net/body/{uuid}/{size}",
+            _ => $"https://minotar.net/avatar/{uuid}/{size}"
         };
     }
-    
+
     /// <summary>
-    /// Central method to get settings as a ServerWrapperConfig object
+    ///     Central method to get settings as a ServerWrapperConfig object
     /// </summary>
     /// <returns>ServerWrapperConfig</returns>
     public static ServerWrapperConfig? ReadFile()

@@ -6,11 +6,9 @@ namespace MinecraftBlazorSuite.Pages;
 
 partial class Settings
 {
-    [Inject]
-    public CryptoService cryptoService { get; set; }
-    
-    [Inject]
-    public SettingsService settingsMan { get; set; }
+    [Inject] public CryptoService cryptoService { get; set; }
+
+    [Inject] public SettingsService settingsMan { get; set; }
 
     private string RawPasswordContent { get; set; }
 
@@ -18,12 +16,11 @@ partial class Settings
     {
         string hashedPass = CryptoService.HashPassword(RawPasswordContent);
         RawPasswordContent = "";
-        
+
         ServerWrapperConfig activeSettings = settingsMan.GetSettings();
         activeSettings.PanelAccess = hashedPass;
-        
+
         settingsMan.SetSettings(activeSettings);
         StateHasChanged();
     }
-
 }

@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-using System.Text;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using MinecraftBlazorSuite.Models;
 
 namespace MinecraftBlazorSuite.Services;
@@ -46,10 +44,10 @@ public class SqliteService
         SqliteCommand cmd = con.CreateCommand();
         cmd.CommandText =
             "INSERT INTO user_sessions (sessionvalue, sessioncreated) VALUES (@sessionvalue, @sessioncreated)";
-        
+
         cmd.Parameters.AddWithValue("@sessionvalue", sessionValue);
         cmd.Parameters.AddWithValue("@sessioncreated", sessionCreated);
-        
+
         cmd.ExecuteNonQueryAsync();
     }
 
@@ -71,19 +69,18 @@ public class SqliteService
         con.Open();
 
         SqliteCommand cmd = con.CreateCommand();
-        cmd.CommandText = "SELECT sessionvalue, sessioncreated FROM user_sessions WHERE sessionvalue = @SessionValue LIMIT 1;";
+        cmd.CommandText =
+            "SELECT sessionvalue, sessioncreated FROM user_sessions WHERE sessionvalue = @SessionValue LIMIT 1;";
 
         cmd.Parameters.AddWithValue("@SessionValue", SessionValue);
         using SqliteDataReader reader = cmd.ExecuteReader();
 
         if (reader.Read())
-        {
             return new UserSession
             {
                 SessionValue = reader.GetString(0),
                 SessionCreated = reader.GetString(1)
             };
-        }
 
         return null;
     }
@@ -101,7 +98,7 @@ public class SqliteService
 
         while (reader.Read())
         {
-            UserSession session = new UserSession
+            UserSession session = new()
             {
                 SessionValue = reader.GetString(0),
                 SessionCreated = reader.GetString(1)
@@ -112,5 +109,4 @@ public class SqliteService
 
         return userList;
     }
-
 }

@@ -1,13 +1,14 @@
 @page "/settings"
 
 <MudText Typo="Typo.h5">Settings</MudText>
-<MudDivider Class="mt-2" />
+<MudDivider Class="mt-2"/>
 
-<div class="mt-2" >
+<div class="mt-2">
     <MudText>To change your password, please see down below:</MudText>
 
-    <div class="mt-2" >
-        <MudTextField HelperText="This field is to change the current password:" @bind-Value="@RawPasswordContent" T="string" />
+    <div class="mt-2">
+        <MudTextField HelperText="This field is to change the current password:" @bind-Value="@RawPasswordContent"
+                      T="string"/>
         <MudButton OnClick="UpdatePass" Variant="Variant.Filled" Color="Color.Success">Update</MudButton>
     </div>
 </div>

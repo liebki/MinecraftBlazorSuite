@@ -6,7 +6,7 @@ namespace MinecraftBlazorSuite.Dialog;
 
 partial class PlayerChangeGamemodeDialog
 {
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; }
 
     public MinecraftGamemodes SelectedGamemode { get; set; }
 

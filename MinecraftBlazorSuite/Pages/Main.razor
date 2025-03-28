@@ -2,7 +2,7 @@
 
 <MudText Typo="Typo.h5">Welcome</MudText>
 
-<MudDivider Class="mt-2" />
+<MudDivider Class="mt-2"/>
 
 <div class="mt-2">
     <MudText Typo="Typo.body1">Please login with the respective password below.</MudText>
@@ -11,10 +11,12 @@
 <div class="center-page">
     <MudContainer Class="form-container">
         <MudForm>
-            <MudTextField @bind-Value="RawPasswordContent" InputType="InputType.Password" T="string" Label="Password" Required="true" RequiredError="Password is required!"/>
+            <MudTextField @bind-Value="RawPasswordContent" InputType="InputType.Password" T="string" Label="Password"
+                          Required="true" RequiredError="Password is required!"/>
 
             <div class="d-flex align-center justify-space-between mt-3">
-                <MudButton OnClick="ExecuteLogin" Variant="Variant.Filled" Color="Color.Success" Class="ml-auto">Login</MudButton>
+                <MudButton OnClick="ExecuteLogin" Variant="Variant.Filled" Color="Color.Success" Class="ml-auto">Login
+                </MudButton>
             </div>
         </MudForm>
     </MudContainer>

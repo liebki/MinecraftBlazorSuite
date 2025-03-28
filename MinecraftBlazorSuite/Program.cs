@@ -1,6 +1,6 @@
 /*
     <MinecraftBlazorSuite - Minecraft Server Wrapper>
-    Copyright (C) <2024> <liebki>
+    Copyright (C) <2025> <liebki>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -37,40 +37,34 @@ public class Program
 
         builder.Services.AddServerSideBlazor();
         builder.Services.AddMudServices();
-        
+
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddScoped<AddressContext>();
-        
+
         builder.Services.AddSingleton<ServerManagementService>();
         builder.Services.AddSingleton<CryptoService>();
-        
+
         builder.Services.AddSingleton<MinecraftServerStateService>();
         builder.Services.AddSingleton<SettingsService>();
-        
+
         builder.Services.AddSingleton<NotificationService>();
         builder.Services.AddScoped<SqliteService>();
 
-        if (config?.UseLetsEncrypt == true)
-        {
-            builder.Services.AddLettuceEncrypt();
-        }
+        if (config?.UseLetsEncrypt == true) builder.Services.AddLettuceEncrypt();
 
         builder.WebHost.UseKestrel(k =>
         {
             if (config?.UseLetsEncrypt == true)
             {
                 IServiceProvider appServices = k.ApplicationServices;
-                k.Listen(IPAddress.Any, 443, o => o.UseHttps(h => 
-                {
-                    h.UseLettuceEncrypt(appServices);
-                }));
+                k.Listen(IPAddress.Any, 443, o => o.UseHttps(h => { h.UseLettuceEncrypt(appServices); }));
             }
             else
             {
                 k.Listen(IPAddress.Any, 5000);
             }
         });
-        
+
         WebApplication app = builder.Build();
         if (!app.Environment.IsDevelopment())
         {
@@ -78,18 +72,15 @@ public class Program
             app.UseHsts();
             app.UseDeveloperExceptionPage();
         }
-        
-        if (config?.UseLetsEncrypt == true)
-        {
-            app.UseHttpsRedirection();
-        }
-        
+
+        if (config?.UseLetsEncrypt == true) app.UseHttpsRedirection();
+
         app.UseStaticFiles();
         app.UseRouting();
-        
+
         app.MapBlazorHub();
         app.MapFallbackToPage("/_Host");
-        
+
         app.Run();
     }
 }

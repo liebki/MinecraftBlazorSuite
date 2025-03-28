@@ -19,5 +19,4 @@ public class MudblazorSnackbarItem
     public string icon { get; set; } = Icons.Material.Filled.Message;
 
     public Color iconColor { get; set; } = Color.Dark;
-    
 }

@@ -5,9 +5,8 @@ namespace MinecraftBlazorSuite.Dialog;
 
 partial class PlayerMessageInputDialog
 {
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-
     public string MessageContent = string.Empty;
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; }
 
     private void Submit()
     {

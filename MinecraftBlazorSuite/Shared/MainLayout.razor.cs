@@ -8,35 +8,41 @@ namespace MinecraftBlazorSuite.Shared;
 
 partial class MainLayout
 {
-    [Inject]
-    public ProtectedLocalStorage localStore { get; set; }
-    
-    [Inject]
-    public SettingsService settingsService { get; set; }
-    
-    [Inject]
-    public CryptoService cryptoService { get; set; }
-    
-    [Inject]
-    public SqliteService sqliteService { get; set; }
-    
-    [Inject]
-    public NavigationManager navMan { get; set; }
-    
-    [Inject] 
-    public NotificationService notifyServ { get; set; }
-    
-    [Inject] 
-    public ISnackbar snackbarServ { get; set; }
-    
+    private readonly MudTheme _theme = new()
+    {
+        PaletteLight = new PaletteLight
+        {
+            PrimaryContrastText = "#292929",
+            AppbarText = "#292929",
+            DrawerText = "#292929",
+            TextPrimary = "#292929",
+            Background = "#FFF",
+            BackgroundGray = "#d9d9d9",
+            DrawerBackground = "#d9d9d9",
+            AppbarBackground = "#d9d9d9",
+            Divider = "#808080"
+        }
+    };
+
+    [Inject] public ProtectedLocalStorage localStore { get; set; }
+
+    [Inject] public SettingsService settingsService { get; set; }
+
+    [Inject] public CryptoService cryptoService { get; set; }
+
+    [Inject] public SqliteService sqliteService { get; set; }
+
+    [Inject] public NavigationManager navMan { get; set; }
+
+    [Inject] public NotificationService notifyServ { get; set; }
+
+    [Inject] public ISnackbar snackbarServ { get; set; }
+
     private bool IsLoggedIn { get; set; }
-    
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (!firstRender || IsLoggedIn) 
-        {
-            return;
-        }
+        if (!firstRender || IsLoggedIn) return;
 
         string currentUri = navMan.Uri;
         if (!currentUri.EndsWith('/'))
@@ -51,7 +57,7 @@ partial class MainLayout
 
             string sessionValue = sessionItem.Value;
             Task<UserSession?> userSessionTask = Task.Run(() => sqliteService.GetSingleUserSession(sessionValue));
-            
+
             UserSession? userSession = await userSessionTask;
             if (userSession != null)
             {
@@ -60,7 +66,7 @@ partial class MainLayout
                 {
                     await localStore.DeleteAsync("session");
                     Task.Run(() => sqliteService.DeleteSession(sessionValue));
-                    
+
                     navMan.NavigateTo("/", true);
                     return;
                 }
@@ -83,26 +89,10 @@ partial class MainLayout
 
     private void Update(MudblazorSnackbarItem msg)
     {
-        snackbarServ.Add(message:msg.message, severity:msg.severity, configure:config =>
+        snackbarServ.Add(msg.message, msg.severity, config =>
         {
             config.Icon = msg.icon;
             config.IconColor = msg.iconColor;
         });
     }
-
-    private readonly MudTheme _theme = new()
-    {
-        PaletteLight = new PaletteLight
-        {
-            PrimaryContrastText = "#292929",
-            AppbarText = "#292929",
-            DrawerText = "#292929",
-            TextPrimary = "#292929",
-            Background = "#FFF",
-            BackgroundGray = "#d9d9d9",
-            DrawerBackground = "#d9d9d9",
-            AppbarBackground = "#d9d9d9",
-            Divider = "#808080"
-        }
-    };
 }

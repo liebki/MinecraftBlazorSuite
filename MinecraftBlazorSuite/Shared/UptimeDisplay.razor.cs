@@ -5,21 +5,20 @@ namespace MinecraftBlazorSuite.Shared;
 
 partial class UptimeDisplay
 {
-    [Inject]
-    public MinecraftServerStateService stateMan { get; set; }
-    
     private string shownUptime = "";
+
+    [Inject] public MinecraftServerStateService stateMan { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Timer timer = new Timer(
+        Timer timer = new(
             e =>
             {
                 InvokeAsync(() =>
                 {
-                    if (shownUptime.Equals(stateMan.GetCurrentUptime(), StringComparison.InvariantCultureIgnoreCase)) 
+                    if (shownUptime.Equals(stateMan.GetCurrentUptime(), StringComparison.InvariantCultureIgnoreCase))
                         return;
-                    
+
                     shownUptime = stateMan.GetCurrentUptime();
                     StateHasChanged();
                 });
@@ -28,5 +27,5 @@ partial class UptimeDisplay
             TimeSpan.Zero,
             TimeSpan.FromSeconds(3)
         );
-    }   
+    }
 }

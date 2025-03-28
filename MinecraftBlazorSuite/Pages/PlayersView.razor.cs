@@ -37,7 +37,7 @@ partial class PlayersView
             await DialogService.ShowAsync<PlayerMessageInputDialog>($"Kick player {playername}:");
         DialogResult? result = await dialog.Result;
 
-        if (result is {Canceled:false})
+        if (result is { Canceled: false })
             SendCommand(string.Format(MinecraftCommands.KickCommand, playername, result.Data));
     }
 
@@ -47,7 +47,7 @@ partial class PlayersView
             await DialogService.ShowAsync<PlayerMessageInputDialog>($"Ban player {playername}:");
         DialogResult? result = await dialog.Result;
 
-        if (result is {Canceled:false})
+        if (result is { Canceled: false })
             SendCommand(string.Format(MinecraftCommands.BanCommand, playername, result.Data));
     }
 
@@ -57,7 +57,7 @@ partial class PlayersView
             await DialogService.ShowAsync<PlayerMessageInputDialog>($"Send {playername} a message:");
         DialogResult? result = await dialog.Result;
 
-        if (result is {Canceled:false})
+        if (result is { Canceled: false })
             SendCommand(string.Format(MinecraftCommands.MsgCommand, playername, result.Data));
     }
 
@@ -74,7 +74,7 @@ partial class PlayersView
             await DialogService.ShowAsync<PlayerChangeGamemodeDialog>($"Change {playername}'s gamemode to:");
         DialogResult? result = await dialog.Result;
 
-        if (result is {Canceled:false})
+        if (result is { Canceled: false })
         {
             MinecraftGamemodes gamemode = (MinecraftGamemodes)result.Data;
             SendCommand(string.Format(MinecraftCommands.GamemodeCommand, gamemode.ToString().ToLower(), playername));

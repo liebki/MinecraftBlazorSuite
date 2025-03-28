@@ -9,9 +9,9 @@ public class ServerWrapperConfig
     public string ServerJarPath { get; set; }
 
     public string JavaArguments { get; set; }
-    
+
     public string PanelAccess { get; set; }
-    
+
     public bool UseLetsEncrypt { get; set; }
 
     public override string ToString()
